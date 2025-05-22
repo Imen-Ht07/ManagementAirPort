@@ -1,0 +1,158 @@
+﻿@model GestionAirPort.Models.Flight
+
+@{
+    ViewData["Title"] = "Détails du Vol";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-info text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-info-circle"></i> Détails du Vol #@Model.FlightId
+            </h3>
+        </div>
+        <div class="card-body text-dark">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="mb-0">Informations du Vol</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">Départ</dt>
+                                <dd class="col-sm-8">@Model.Departure</dd>
+
+                                <dt class="col-sm-4">Destination</dt>
+                                <dd class="col-sm-8">@Model.Destination</dd>
+
+                                <dt class="col-sm-4">Date de départ</dt>
+                                <dd class="col-sm-8">@Model.FlightDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4">Durée estimée</dt>
+                                <dd class="col-sm-8">@Model.EstimatedDuration minutes</dd>
+
+                                <dt class="col-sm-4">Arrivée prévue</dt>
+                                <dd class="col-sm-8">@Model.EffectiveArrival.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4">Statut</dt>
+                                <dd class="col-sm-8">
+                                    @{
+                                        var now = DateTime.UtcNow;
+                                        if (Model.FlightDate > now)
+                                        {
+                                            <span class="badge bg-warning">À venir</span>
+                                        }
+                                        else if (Model.FlightDate <= now && now <= Model.EffectiveArrival)
+                                        {
+                                            <span class="badge bg-success">En cours</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">Terminé</span>
+                                        }
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h5 class="mb-0">Informations de l'Avion</h5>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.Plane != null)
+                            {
+                                <dl class="row">
+                                    <dt class="col-sm-4">Type d'avion</dt>
+                                    <dd class="col-sm-8">
+                                        <span class="badge bg-info">@Model.Plane.PlaneType</span>
+                                    </dd>
+
+                                    <dt class="col-sm-4">Capacité</dt>
+                                    <dd class="col-sm-8">@Model.Plane.Capacity passagers</dd>
+
+                                    <dt class="col-sm-4">Date de fabrication</dt>
+                                    <dd class="col-sm-8">@Model.Plane.ManufactureDate.ToString("dd/MM/yyyy")</dd>
+                                </dl>
+
+                                @if (!string.IsNullOrEmpty(Model.AirlineLogo))
+                                {
+                                    <div class="text-center mt-3">
+                                        <img src="~/uploads/@Model.AirlineLogo" alt="Logo" class="img-thumbnail" style="max-width: 200px;" />
+                                        <p class="text-muted mt-2">Logo de la compagnie</p>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle"></i> Aucun avion assigné à ce vol
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Tickets != null && Model.Tickets.Any())
+            {
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Tickets réservés (@Model.Tickets.Count)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Passager</th>
+                                        <th>Siège</th>
+                                        <th>Prix</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ticket in Model.Tickets)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @if (ticket.Passenger?.FullName != null)
+                                                {
+                                                    @($"{ticket.Passenger.FullName.FirstName} {ticket.Passenger.FullName.LastName}")
+                                                }
+                                            </td>
+                                            <td>@ticket.Siege</td>
+                                            <td>@ticket.Prix.ToString("C2")</td>
+                                            <td>
+                                                @if (ticket.VIP)
+                                                {
+                                                    <span class="badge bg-warning">VIP</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">Standard</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model.FlightId" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Modifier
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,151 @@
+﻿@model GestionAirPort.Models.Staff
+
+@{
+    ViewData["Title"] = "Modifier un Membre du Personnel";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-warning">
+            <h3 class="card-title mb-0 text-dark">
+                <i class="fas fa-user-edit"></i> Modifier le Membre du Personnel
+            </h3>
+        </div>
+        <div class="card-body text-dark">
+            <form asp-action="Edit" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <input type="hidden" asp-for="PassportNumber" />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Informations Personnelles</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label asp-for="FullName.FirstName" class="form-label">Prénom</label>
+                                        <input asp-for="FullName.FirstName" class="form-control" />
+                                        <span asp-validation-for="FullName.FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label asp-for="FullName.LastName" class="form-label">Nom</label>
+                                        <input asp-for="FullName.LastName" class="form-control" />
+                                        <span asp-validation-for="FullName.LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="PassportNumber" class="form-label">Numéro de Passeport</label>
+                                    <input asp-for="PassportNumber" class="form-control" readonly />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="BirthDate" class="form-label">Date de Naissance</label>
+                                    <input asp-for="BirthDate" class="form-control" type="date" />
+                                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">Informations Professionnelles</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Function" class="form-label">Fonction</label>
+                                    <select asp-for="Function" class="form-select">
+                                        <option value="Pilote">Pilote</option>
+                                        <option value="Hôtesse">Hôtesse</option>
+                                        <option value="Agent">Agent</option>
+                                        <option value="Technicien">Technicien</option>
+                                    </select>
+                                    <span asp-validation-for="Function" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="EmployementDate" class="form-label">Date d'Embauche</label>
+                                    <input asp-for="EmployementDate" class="form-control" type="date" />
+                                    <span asp-validation-for="EmployementDate" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Salary" class="form-label">Salaire</label>
+                                    <div class="input-group">
+                                        <input asp-for="Salary" class="form-control" type="number" step="0.01" />
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                    <span asp-validation-for="Salary" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Informations de Contact</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="TelNumber" class="form-label">Téléphone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        <input asp-for="TelNumber" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="TelNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="EmailAddress" class="form-label">Email</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                        <input asp-for="EmailAddress" class="form-control" type="email" />
+                                    </div>
+                                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-transparent">
+                    <button type="submit" class="btn btn-warning">
+                        <i class="fas fa-save"></i> Enregistrer les modifications
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            // Validation dates
+            const today = new Date().toISOString().split('T')[0];
+            const minBirthDate = new Date();
+            minBirthDate.setFullYear(minBirthDate.getFullYear() - 65);
+            const maxBirthDate = new Date();
+            maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 18);
+
+            $('#BirthDate').attr('min', minBirthDate.toISOString().split('T')[0]);
+            $('#BirthDate').attr('max', maxBirthDate.toISOString().split('T')[0]);
+            $('#EmployementDate').attr('max', today);
+        });
+    </script>
+}

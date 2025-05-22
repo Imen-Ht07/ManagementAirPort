@@ -1,0 +1,50 @@
+﻿@if (Model.Tickets != null && Model.Tickets.Any())
+{
+    <div class="card mb-3">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">
+                <i class="fas fa-ticket-alt"></i> Tickets Associés
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="list-group">
+                @foreach (var ticket in Model.Tickets)
+                {
+                    <div class="list-group-item">
+                        @if (ticket.Flight != null)
+                        {
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">
+                                    <i class="fas fa-plane me-2"></i>
+                                    Ticket #@ticket.Id
+                                </h6>
+                                <small class="text-muted">
+                                    Prix: @ticket.Price.ToString("C2")
+                                </small>
+                            </div>
+                            <p class="mb-1">
+                                <small>
+                                    <i class="fas fa-calendar me-2"></i>
+                                    @ticket.Flight.Date.ToString("dd/MM/yyyy HH:mm")
+                                </small>
+                            </p>
+                            <p class="mb-0">
+                                <small>
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    De: @ticket.Flight.Departure - Vers: @ticket.Flight.Destination
+                                </small>
+                            </p>
+                        }
+                        else
+                        {
+                            <p class="mb-0 text-muted">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                Informations de vol non disponibles
+                            </p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

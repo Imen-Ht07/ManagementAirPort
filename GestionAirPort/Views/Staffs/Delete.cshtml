@@ -1,0 +1,92 @@
+﻿@model GestionAirPort.Models.Staff
+
+@{
+    ViewData["Title"] = "Supprimer un Membre du Personnel";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-exclamation-triangle"></i> Confirmation de Suppression
+            </h3>
+        </div>
+        <div class="card-body text-dark">
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-circle"></i>
+                Êtes-vous sûr de vouloir supprimer ce membre du personnel ?
+                Cette action est irréversible !
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Détails du Membre</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">Numéro Passeport</dt>
+                        <dd class="col-sm-9">@Model.PassportNumber</dd>
+
+                        <dt class="col-sm-3">Nom Complet</dt>
+                        <dd class="col-sm-9">@Model.FullName.FirstName @Model.FullName.LastName</dd>
+
+                        <dt class="col-sm-3">Fonction</dt>
+                        <dd class="col-sm-9">@Model.Function</dd>
+
+                        <dt class="col-sm-3">Date d'Embauche</dt>
+                        <dd class="col-sm-9">@Model.EmployementDate.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-3">Contact</dt>
+                        <dd class="col-sm-9">
+                            <i class="fas fa-phone me-2"></i>@Model.TelNumber<br />
+                            <i class="fas fa-envelope me-2"></i>@Model.EmailAddress
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            @if (Model.Tickets != null && Model.Tickets.Any())
+            {
+                <div class="alert alert-danger">
+                    <i class="fas fa-ban"></i>
+                    Attention : Ce membre du personnel a des tickets associés.
+                    La suppression pourrait affecter les données liées.
+                </div>
+            }
+
+            <form asp-action="Delete" id="deleteForm">
+                <input type="hidden" asp-for="PassportNumber" />
+                <button type="submit" class="btn btn-danger" id="deleteButton">
+                    <i class="fas fa-trash"></i> Confirmer la suppression
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour à la liste
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            $('#deleteButton').click(function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#deleteForm').submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

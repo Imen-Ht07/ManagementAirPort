@@ -1,0 +1,179 @@
+﻿@model GestionAirPort.Models.Ticket
+
+@{
+    ViewData["Title"] = "Détails du Ticket";
+    var currentDateTime = "2025-05-22 09:19:03";
+    var currentUser = "Imen-Ht07";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2 text-primary"></i>
+                <span class="fw-bold text-primary">@currentUser</span>
+            </div>
+            <div>
+                <i class="fas fa-clock me-2 text-info"></i>
+                <span class="text-info">@currentDateTime UTC</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-info text-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-ticket-alt me-2"></i>
+                    Ticket #@Model.TicketId
+                    @if (Model.VIP)
+                    {
+                        <span class="badge bg-warning ms-2">
+                            <i class="fas fa-star"></i> VIP
+                        </span>
+                    }
+                </h3>
+                <span class="badge bg-light text-dark fs-5">@Model.Prix.ToString("C2")</span>
+            </div>
+        </div>
+
+        <div class="card-body py-4">
+            <div class="row g-4">
+                <!-- Informations du Vol -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm hover-card">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-info">
+                                <i class="fas fa-plane me-2"></i>Informations du Vol
+                            </h5>
+                        </div>
+                        <div class="card-body text-dark">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4 text-muted">N° de Vol</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-primary">@Model.Flight.FlightId</span>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Départ</dt>
+                                <dd class="col-sm-8">
+                                    <i class="fas fa-plane-departure text-info me-2"></i>
+                                    @Model.Flight.Departure
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Destination</dt>
+                                <dd class="col-sm-8">
+                                    <i class="fas fa-plane-arrival text-info me-2"></i>
+                                    @Model.Flight.Destination
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Date</dt>
+                                <dd class="col-sm-8">
+                                    <i class="fas fa-calendar text-info me-2"></i>
+                                    @Model.Flight.FlightDate.ToString("dd/MM/yyyy HH:mm")
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Siège</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-info">
+                                        <i class="fas fa-chair me-2"></i>@Model.Siege
+                                    </span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Informations du Passager -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm hover-card">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-info">
+                                <i class="fas fa-user me-2"></i>Informations du Passager
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4 text-muted">Nom</dt>
+                                <dd class="col-sm-8">@Model.Passenger.FullName.LastName</dd>
+
+                                <dt class="col-sm-4 text-muted">Prénom</dt>
+                                <dd class="col-sm-8">@Model.Passenger.FullName.FirstName</dd>
+
+                                <dt class="col-sm-4 text-muted">Passeport</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-secondary">@Model.Passenger.PassportNumber</span>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Email</dt>
+                                <dd class="col-sm-8">
+                                    <a href="mailto:@Model.Passenger.EmailAddress" class="text-decoration-none">
+                                        <i class="fas fa-envelope me-2"></i>@Model.Passenger.EmailAddress
+                                    </a>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Téléphone</dt>
+                                <dd class="col-sm-8">
+                                    <a href="tel:@Model.Passenger.TelNumber" class="text-decoration-none">
+                                        <i class="fas fa-phone me-2"></i>@Model.Passenger.TelNumber
+                                    </a>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Retour
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.TicketId" class="btn btn-warning">
+                        <i class="fas fa-edit me-2"></i>Modifier
+                    </a>
+                </div>
+                <small class="text-muted">
+                    <i class="fas fa-history me-2"></i>
+                    Dernière mise à jour: @currentDateTime
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .user-info-bar {
+        border-left: 4px solid #17a2b8;
+        background: linear-gradient(to right, rgba(23,162,184,0.1), transparent);
+    }
+
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+        }
+
+    .badge {
+        padding: 0.5em 1em;
+    }
+
+    .text-info {
+        color: #17a2b8 !important;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        transition: all 0.2s;
+    }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+</style>

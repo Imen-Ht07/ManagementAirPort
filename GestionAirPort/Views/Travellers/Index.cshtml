@@ -1,0 +1,227 @@
+﻿@model IEnumerable<GestionAirPort.Models.Traveller>
+
+@{
+    ViewData["Title"] = "Liste des Voyageurs";
+    var currentUser = "Imen-Ht07";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2 text-primary"></i>
+                <span class="fw-bold text-primary">@currentUser</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Total Voyageurs</h6>
+                            <h2 class="mt-2 mb-0">@Model.Count()</h2>
+                        </div>
+                        <i class="fas fa-suitcase-rolling fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Avec Tickets</h6>
+                            <h2 class="mt-2 mb-0">@Model.Count(p => p.Tickets.Any())</h2>
+                        </div>
+                        <i class="fas fa-ticket-alt fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Âge Moyen</h6>
+                            <h2 class="mt-2 mb-0">@Model.Average(p => p.Age).ToString("F0")</h2>
+                        </div>
+                        <i class="fas fa-birthday-cake fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-secondary text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Nationalités</h6>
+                            <h2 class="mt-2 mb-0">@Model.Select(t => t.Nationality).Distinct().Count()</h2>
+                        </div>
+                        <i class="fas fa-globe fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0 text-primary">
+                    <i class="fas fa-suitcase-rolling me-2"></i>Liste des Voyageurs
+                </h3>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Nouveau Voyageur
+                </a>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="card-body border-bottom">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text bg-primary text-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un voyageur...">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select id="filterNationality" class="form-select">
+                        <option value="">Toutes les nationalités</option>
+                        @foreach (var nationality in Model.Select(t => t.Nationality).Distinct().OrderBy(n => n))
+                        {
+                            <option value="@nationality">@nationality</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="filterTickets" class="form-select">
+                        <option value="all">Tous les voyageurs</option>
+                        <option value="with">Avec tickets</option>
+                        <option value="without">Sans tickets</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="travellersTable">
+                    <thead class="bg-light">
+                        <tr>
+                            <th><i class="fas fa-passport me-2"></i>Passeport</th>
+                            <th><i class="fas fa-user me-2"></i>Nom Complet</th>
+                            <th><i class="fas fa-globe me-2"></i>Nationalité</th>
+                            <th><i class="fas fa-heartbeat me-2"></i>Santé</th>
+                            <th><i class="fas fa-birthday-cake me-2"></i>Âge</th>
+                            <th><i class="fas fa-ticket-alt me-2"></i>Tickets</th>
+                            <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var traveller in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="badge bg-primary">@traveller.PassportNumber</span>
+                                </td>
+                                <td>@traveller.FullName.FirstName @traveller.FullName.LastName</td>
+                                <td>
+                                    <span class="badge bg-info">@traveller.Nationality</span>
+                                </td>
+                                <td>
+                                    <span class="d-inline-block text-truncate" style="max-width: 150px;"
+                                          title="@traveller.HealthInformation">
+                                        @traveller.HealthInformation
+                                    </span>
+                                </td>
+                                <td>
+                                    @{
+                                        var ageClass = traveller.Age < 30 ? "bg-success" :
+                                        traveller.Age < 50 ? "bg-info" :
+                                        "bg-secondary";
+                                    }
+                                    <span class="badge @ageClass">@traveller.Age ans</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(traveller.Tickets.Any() ? "success" : "secondary")">
+                                        @traveller.Tickets.Count
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a asp-action="Details" asp-route-id="@traveller.PassportNumber"
+                                           class="btn btn-outline-primary" title="Détails">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@traveller.PassportNumber"
+                                           class="btn btn-outline-warning" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@traveller.PassportNumber"
+                                           class="btn btn-outline-danger" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted">
+                    Total: @Model.Count() voyageur(s)
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Fonction de filtrage
+            function filterTable() {
+                var searchText = $("#searchInput").val().toLowerCase();
+                var nationality = $("#filterNationality").val();
+                var ticketFilter = $("#filterTickets").val();
+
+                $("#travellersTable tbody tr").each(function () {
+                    var row = $(this);
+                    var rowNationality = row.find("td:eq(2)").text().trim();
+                    var ticketCount = parseInt(row.find("td:eq(5) .badge").text());
+                    var textMatch = row.text().toLowerCase().indexOf(searchText) > -1;
+                    var nationalityMatch = nationality === "" || rowNationality === nationality;
+                    var ticketMatch = true;
+
+                    if (ticketFilter === "with") {
+                        ticketMatch = ticketCount > 0;
+                    } else if (ticketFilter === "without") {
+                        ticketMatch = ticketCount === 0;
+                    }
+
+                    row.toggle(textMatch && nationalityMatch && ticketMatch);
+                });
+            }
+
+            // Event listeners
+            $("#searchInput").on("keyup", filterTable);
+            $("#filterNationality").on("change", filterTable);
+            $("#filterTickets").on("change", filterTable);
+        });
+    </script>
+}

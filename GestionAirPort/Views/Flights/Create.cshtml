@@ -1,0 +1,294 @@
+﻿@model GestionAirPort.Models.Flight
+
+@{
+    ViewData["Title"] = "Nouveau Vol";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2"></i>
+                <span class="fw-bold">@ViewBag.CurrentUser</span>
+            </div>
+            <div>
+                <i class="fas fa-clock me-2"></i>
+                <span>2025-05-21 18:02:43 UTC</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-plane-departure me-2"></i> Nouveau Vol
+            </h3>
+        </div>
+        <div class="card-body bg-light">
+            <form asp-action="Create" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-primary">
+                                <i class="fas fa-info-circle me-2"></i>Détails du Vol
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label asp-for="Departure" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-plane-departure me-2"></i>Départ
+                                </label>
+                                <input asp-for="Departure" class="form-control shadow-sm" />
+                                <span asp-validation-for="Departure" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Destination" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-plane-arrival me-2"></i>Destination
+                                </label>
+                                <input asp-for="Destination" class="form-control shadow-sm" />
+                                <span asp-validation-for="Destination" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="FlightDate" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-calendar-alt me-2"></i>Date de Vol
+                                </label>
+                                <input asp-for="FlightDate" type="datetime-local" class="form-control shadow-sm" />
+                                <span asp-validation-for="FlightDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="EstimatedDuration" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-clock me-2"></i>Durée Estimée
+                                </label>
+                                <div class="input-group shadow-sm">
+                                    <input asp-for="EstimatedDuration" class="form-control" />
+                                    <span class="input-group-text bg-primary text-white">minutes</span>
+                                </div>
+                                <span asp-validation-for="EstimatedDuration" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="EffectiveArrival" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-plane-arrival me-2"></i>Arrivée Effective
+                                </label>
+                                <input asp-for="EffectiveArrival" type="datetime-local" class="form-control shadow-sm" />
+                                <span asp-validation-for="EffectiveArrival" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-primary">
+                                <i class="fas fa-plane me-2"></i>Avion et Logo
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label asp-for="PlaneFk" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-plane me-2"></i>Avion
+                                </label>
+                                <select asp-for="PlaneFk"
+                                        class="form-select shadow-sm"
+                                        asp-items="ViewBag.PlaneFk"
+                                        data-placeholder="-- Sélectionner un avion --">
+                                    <option value="">-- Sélectionner un avion --</option>
+                                </select>
+                                <span asp-validation-for="PlaneFk" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="LogoFile" class="form-label fw-bold text-dark">
+                                    <i class="fas fa-image me-2"></i>Logo de la compagnie
+                                </label>
+                                <input asp-for="LogoFile" type="file" class="form-control shadow-sm" accept="image/*" />
+                                <span asp-validation-for="LogoFile" class="text-danger"></span>
+                            </div>
+
+                            <div id="imagePreview" class="text-center mt-3 p-3 border rounded shadow-sm" style="display:none;">
+                                <img id="preview" src="#" alt="Logo Preview" class="img-thumbnail" style="max-width: 200px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="card mt-3 shadow-sm">
+                        <div class="card-footer bg-transparent border-0">
+                            <button type="submit" class="btn btn-primary shadow">
+                                <i class="fas fa-save me-2"></i> Enregistrer
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary shadow ms-2">
+                                <i class="fas fa-arrow-left me-2"></i> Retour à la liste
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .user-info-bar {
+        background-color: #f8f9fa;
+        border-left: 4px solid #4e73df;
+    }
+
+    .form-label {
+        color: #2c3e50 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+
+    .card {
+        border: none;
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+    .card-header {
+        padding: 1rem;
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
+    .shadow-sm {
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
+    }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+    .select2-container {
+        width: 100% !important;
+        z-index: 1056 !important;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection {
+        height: 38px !important;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection__rendered {
+        line-height: 36px !important;
+        padding-left: 12px !important;
+    }
+
+    .select2-container--bootstrap-5 .select2-selection__arrow {
+        height: 36px !important;
+    }
+
+    .select2-dropdown {
+        z-index: 1056 !important;
+        border-color: #4e73df;
+    }
+
+    .select2-container--bootstrap-5 .select2-results__option--highlighted {
+        background-color: #4e73df !important;
+    }
+
+    #imagePreview {
+        transition: all 0.3s ease;
+    }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            // Destruction de toute instance précédente de Select2
+            if ($('.form-select').hasClass('select2-hidden-accessible')) {
+                $('.form-select').select2('destroy');
+            }
+
+            // Initialisation de Select2
+            $('.form-select').select2({
+                theme: 'bootstrap-5',
+                width: '100%',
+                language: 'fr',
+                placeholder: '-- Sélectionner un avion --',
+                allowClear: true,
+                dropdownParent: $('body')
+            });
+
+            // Set min date for flight date
+            const today = new Date().toISOString().slice(0, 16);
+            $('#FlightDate').attr('min', today);
+
+            // Auto calculate effective arrival
+            $('#EstimatedDuration, #FlightDate').change(function() {
+                const flightDate = new Date($('#FlightDate').val());
+                const duration = parseInt($('#EstimatedDuration').val());
+
+                if (!isNaN(duration) && flightDate) {
+                    const arrivalDate = new Date(flightDate.getTime() + duration * 60000);
+                    $('#EffectiveArrival').val(arrivalDate.toISOString().slice(0,16));
+                }
+            });
+
+            // Image preview with validation
+            $("#LogoFile").change(function () {
+                const file = this.files[0];
+                if (file) {
+                    if (file.size > 5242880) { // 5MB
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Fichier trop volumineux',
+                            text: 'La taille maximum autorisée est de 5MB'
+                        });
+                        this.value = '';
+                        $('#imagePreview').hide();
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#preview').attr('src', e.target.result);
+                        $('#imagePreview').show();
+                    }
+                    reader.readAsDataURL(file);
+                } else {
+                    $('#imagePreview').hide();
+                }
+            });
+
+            // Animation des cartes
+            $('.card').hover(
+                function() { $(this).addClass('shadow'); },
+                function() { $(this).removeClass('shadow'); }
+            );
+        });
+    </script>
+}

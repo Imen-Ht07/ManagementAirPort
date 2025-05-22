@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GestionAirPort</title>
+    <!-- Dans la section head -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+
+    <!-- Dans la section scripts, après jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/i18n/fr.js"></script>
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="~/css/site.css" rel="stylesheet" asp-append-version="true" />
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #0d47a1;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            transition: all 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: #fff !important;
+                transform: translateY(-2px);
+            }
+
+            .nav-link.active {
+                color: #fff !important;
+                font-weight: bold;
+            }
+
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                width: 0;
+                height: 2px;
+                background: #fff;
+                transition: all 0.3s ease;
+                transform: translateX(-50%);
+            }
+
+            .nav-link:hover::after {
+                width: 100%;
+            }
+
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white !important;
+            padding: 1rem 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        main {
+            margin-bottom: 60px;
+            padding: 20px 0;
+        }
+
+        /* Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* User info */
+        .user-info {
+            color: white;
+            padding: 0.5rem 1rem;
+            border-left: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 70px;
+            right: 20px;
+            display: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+            .scroll-to-top:hover {
+                background: var(--secondary-color);
+                transform: translateY(-3px);
+            }
+        /* Ajout des styles pour le menu déroulant */
+        .dropdown-menu {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-item {
+            color: white !important;
+            transition: all 0.3s ease;
+            padding: 0.7rem 1.5rem;
+        }
+
+            .dropdown-item:hover {
+                background: rgba(255,255,255,0.1);
+                transform: translateX(5px);
+            }
+
+        .dropdown-divider {
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        /* Style pour la navigation par cartes */
+        .nav-cards {
+            padding: 20px 0;
+        }
+
+        .nav-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: var(--primary-color);
+            display: block;
+        }
+
+            .nav-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-card i {
+                font-size: 2rem;
+                margin-bottom: 10px;
+                color: var(--primary-color);
+            }
+
+            .nav-card h5 {
+                margin: 0;
+                color: var(--primary-color);
+            }
+
+        /* Breadcrumb styles */
+        .breadcrumb {
+            background: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <i class="fas fa-plane-departure me-2"></i>GestionAirPort
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i>Accueil
+                            </a>
+                        </li>
+
+                        <!-- Menu Gestion des Vols -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-plane me-1"></i>Gestion des Vols
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Planes" asp-action="Index">
+                                        <i class="fas fa-plane me-2"></i>Avions
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Flights" asp-action="Index">
+                                        <i class="fas fa-route me-2"></i>Vols
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Tickets" asp-action="Index">
+                                        <i class="fas fa-ticket-alt me-2"></i>Tickets
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <!-- Menu Gestion des Personnes -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-users me-1"></i>Gestion des Personnes
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Passengers" asp-action="Index">
+                                        <i class="fas fa-user me-2"></i>Passagers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Staffs" asp-action="Index">
+                                        <i class="fas fa-user-tie me-2"></i>Staff
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Travellers" asp-action="Index">
+                                        <i class="fas fa-suitcase-rolling me-2"></i>Voyageurs
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="user-info">
+                        <span class="me-3">
+                            <i class="fas fa-user-circle me-1"></i>
+                            Imen-Ht07
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Breadcrumb -->
+        <div class="container mt-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/" class="text-decoration-none">
+                            <i class="fas fa-home"></i>
+                        </a>
+                    </li>
+                    @{
+                        var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+                        var action = ViewContext.RouteData.Values["action"]?.ToString();
+                    }
+                    @if (!string.IsNullOrEmpty(controller))
+                    {
+                        <li class="breadcrumb-item">@controller</li>
+                    }
+                    @if (!string.IsNullOrEmpty(action) && action != "Index")
+                    {
+                        <li class="breadcrumb-item active">@action</li>
+                    }
+                </ol>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <i class="fas fa-check-circle me-2"></i>@TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>@TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="container text-center">
+            <span>&copy; @DateTime.Now.Year - GestionAirPort</span>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Scripts -->
+    <!-- À la fin du body, après jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Hide loader when page is ready
+            $('.page-loader').fadeOut();
+
+            // Active nav link
+            const currentUrl = window.location.pathname;
+            $('.nav-link').each(function () {
+                if ($(this).attr('href') === currentUrl) {
+                    $(this).addClass('active');
+                }
+            });
+
+            // Scroll to top button
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 100) {
+                    $('.scroll-to-top').fadeIn();
+                } else {
+                    $('.scroll-to-top').fadeOut();
+                }
+            });
+
+            $('.scroll-to-top').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                return false;
+            });
+
+            // Initialize Select2
+            $('.select2').select2({
+                theme: 'bootstrap-5'
+            });
+
+       
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

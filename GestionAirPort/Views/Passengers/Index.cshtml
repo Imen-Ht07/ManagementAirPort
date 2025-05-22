@@ -1,0 +1,240 @@
+﻿@model IEnumerable<GestionAirPort.Models.Passenger>
+
+@{
+    ViewData["Title"] = "Liste des Passagers";
+    var currentUser = "Imen-Ht07";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2 text-primary"></i>
+                <span class="fw-bold text-primary">@currentUser</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4 text-dark">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Total Passagers</h6>
+                            <h2 class="mt-2 mb-0">@Model.Count()</h2>
+                        </div>
+                        <i class="fas fa-users fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Avec Tickets</h6>
+                            <h2 class="mt-2 mb-0">@Model.Count(p => p.Tickets.Any())</h2>
+                        </div>
+                        <i class="fas fa-ticket-alt fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Âge Moyen</h6>
+                            <h2 class="mt-2 mb-0">@Model.Average(p => p.Age).ToString("F0")</h2>
+                        </div>
+                        <i class="fas fa-birthday-cake fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="card-title mb-0">Tickets/Passager</h6>
+                            <h2 class="mt-2 mb-0">@(Model.Any() ? ((double)Model.Sum(p => p.Tickets.Count) / Model.Count()).ToString("F1") : "0")</h2>
+                        </div>
+                        <i class="fas fa-chart-line fa-2x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0 text-primary">
+                    <i class="fas fa-users me-2"></i>Liste des Passagers
+                </h3>
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="fas fa-plus me-2"></i>Nouveau Passager
+                </a>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="card-body border-bottom">
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <div class="input-group">
+                        <span class="input-group-text bg-primary text-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un passager...">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <select id="filterTickets" class="form-select">
+                        <option value="all">Tous les passagers</option>
+                        <option value="with">Avec tickets</option>
+                        <option value="without">Sans tickets</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="passengersTable">
+                    <thead class="bg-light">
+                        <tr>
+                            <th><i class="fas fa-passport me-2"></i>Passeport</th>
+                            <th><i class="fas fa-user me-2"></i>Nom Complet</th>
+                            <th><i class="fas fa-birthday-cake me-2"></i>Âge</th>
+                            <th><i class="fas fa-phone me-2"></i>Téléphone</th>
+                            <th><i class="fas fa-envelope me-2"></i>Email</th>
+                            <th><i class="fas fa-ticket-alt me-2"></i>Tickets</th>
+                            <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var passenger in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <span class="badge bg-primary">@passenger.PassportNumber</span>
+                                </td>
+                                <td>@passenger.FullName.FirstName @passenger.FullName.LastName</td>
+                                <td>
+                                    <span class="badge bg-@(passenger.Age < 30 ? "success" : passenger.Age < 50 ? "info" : "secondary")">
+                                        @passenger.Age ans
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="tel:@passenger.TelNumber" class="text-decoration-none">
+                                        @passenger.TelNumber
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="mailto:@passenger.EmailAddress" class="text-decoration-none">
+                                        @passenger.EmailAddress
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(passenger.Tickets.Any() ? "success" : "secondary")">
+                                        @passenger.Tickets.Count
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a asp-action="Details" asp-route-id="@passenger.PassportNumber"
+                                           class="btn btn-info btn-sm" title="Détails">
+                                            <i class="fas fa-info-circle"></i>
+                                        </a>
+                                        <a asp-action="Edit" asp-route-id="@passenger.PassportNumber"
+                                           class="btn btn-warning btn-sm" title="Modifier">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@passenger.PassportNumber"
+                                           class="btn btn-danger btn-sm" title="Supprimer">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="text-muted">
+                    Total: @Model.Count() passager(s)
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+        }
+
+    .table th {
+        white-space: nowrap;
+    }
+
+    .badge {
+        padding: 0.5em 1em;
+    }
+
+    .btn-group .btn {
+        padding: 0.25rem 0.5rem;
+    }
+
+    .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Search functionality
+            $("#searchInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#passengersTable tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            // Filter functionality
+            $("#filterTickets").change(function () {
+                var value = $(this).val();
+                $("#passengersTable tbody tr").each(function () {
+                    var tickets = parseInt($(this).find("td:eq(5) .badge").text());
+                    if (value === "all") {
+                        $(this).show();
+                    } else if (value === "with" && tickets > 0) {
+                        $(this).show();
+                    } else if (value === "without" && tickets === 0) {
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+        });
+    </script>
+}

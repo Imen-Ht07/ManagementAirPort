@@ -1,0 +1,250 @@
+﻿@model GestionAirPort.Models.Traveller
+
+@{
+    ViewData["Title"] = "Supprimer le Voyageur";
+    var currentDateTime = "2025-05-22 10:51:32";
+    var currentUser = "Imen-Ht07";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2 text-primary"></i>
+                <span class="fw-bold text-primary">@currentUser</span>
+            </div>
+            <div>
+                <i class="fas fa-clock me-2 text-info"></i>
+                <span class="text-info">@currentDateTime UTC</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-user-times me-2"></i>
+                    Supprimer le Voyageur
+                    <span class="badge bg-light text-danger ms-2">@Model.PassportNumber</span>
+                </h3>
+                <span class="badge bg-light text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Action irréversible
+                </span>
+            </div>
+        </div>
+
+        <div class="card-body py-4">
+            <!-- Warning Alert -->
+            <div class="alert alert-danger mb-4">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-exclamation-triangle fa-2x"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h5 class="alert-heading">Attention!</h5>
+                        <p class="mb-0">
+                            Vous êtes sur le point de supprimer définitivement ce voyageur.
+                            Cette action est irréversible.
+                        </p>
+                        @if (Model.Tickets != null && Model.Tickets.Any())
+                        {
+                            <hr>
+                            <p class="mb-0 text-danger">
+                                <strong>Important:</strong> Ce voyageur possède @Model.Tickets.Count ticket(s) associé(s).
+                                La suppression est impossible tant que des tickets sont associés.
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- Informations Personnelles -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-danger">
+                                <i class="fas fa-id-card me-2"></i>Informations Personnelles
+                            </h5>
+                        </div>
+                        <div class="card-body text-dark">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4 text-muted">Nom Complet</dt>
+                                <dd class="col-sm-8 fw-bold">
+                                    @Model.FullName.FirstName @Model.FullName.LastName
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">N° Passeport</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-danger">@Model.PassportNumber</span>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Nationalité</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-info">
+                                        <i class="fas fa-globe me-1"></i>
+                                        @Model.Nationality
+                                    </span>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Date de Naissance</dt>
+                                <dd class="col-sm-8">
+                                    <i class="fas fa-calendar me-2"></i>
+                                    @Model.BirthDate.ToString("dd MMMM yyyy")
+                                    <small class="text-muted">(@Model.Age ans)</small>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Santé</dt>
+                                <dd class="col-sm-8">
+                                    <div class="alert alert-info mb-0 py-2">
+                                        <i class="fas fa-heartbeat me-2"></i>
+                                        @Model.HealthInformation
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact et Tickets -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-danger">
+                                <i class="fas fa-address-book me-2"></i>Contact et Tickets
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row mb-0">
+                                <dt class="col-sm-4 text-muted">Email</dt>
+                                <dd class="col-sm-8">
+                                    <a href="mailto:@Model.EmailAddress" class="text-decoration-none">
+                                        <i class="fas fa-envelope me-2"></i>
+                                        @Model.EmailAddress
+                                    </a>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Téléphone</dt>
+                                <dd class="col-sm-8">
+                                    <a href="tel:@Model.TelNumber" class="text-decoration-none">
+                                        <i class="fas fa-phone me-2"></i>
+                                        @Model.TelNumber
+                                    </a>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Tickets</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-@(Model.Tickets.Any() ? "warning" : "secondary")">
+                                        @Model.Tickets.Count ticket(s)
+                                    </span>
+                                    @if (Model.Tickets.Any())
+                                    {
+                                        <div class="mt-2 small">
+                                            @foreach (var ticket in Model.Tickets)
+                                            {
+                                                <div class="mb-1">
+                                                    <i class="fas fa-plane-departure me-1"></i>
+                                                    Vol #@ticket.FlightFk - Siège @ticket.Siege
+                                                    @if (ticket.VIP)
+                                                    {
+                                                        <span class="badge bg-warning text-dark">VIP</span>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <form asp-action="Delete" id="deleteForm">
+                    <input type="hidden" asp-for="PassportNumber" />
+                    <div class="btn-group">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Retour
+                        </a>
+                        @if (!Model.Tickets.Any())
+                        {
+                            <button type="submit" class="btn btn-danger" id="deleteButton">
+                                <i class="fas fa-trash-alt me-2"></i>Confirmer la suppression
+                            </button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-danger" disabled>
+                                <i class="fas fa-lock me-2"></i>Suppression bloquée
+                            </button>
+                        }
+                    </div>
+                </form>
+                <small class="text-muted">
+                    <i class="fas fa-user-shield me-2"></i>
+                    Action par: @currentUser
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+        }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+    }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+    .badge {
+        padding: 0.5em 1em;
+    }
+
+    .alert {
+        border-left: 4px solid #dc3545;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Confirmation de suppression avec SweetAlert2
+            $('#deleteForm').on('submit', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Êtes-vous sûr?',
+                    html: `Vous êtes sur le point de supprimer le voyageur <strong>${'@Model.FullName.FirstName @Model.FullName.LastName'}</strong>.<br>Cette action est irréversible!`,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#dc3545',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Oui, supprimer',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.submit();
+                    }
+                });
+            });
+        });
+    </script>
+}

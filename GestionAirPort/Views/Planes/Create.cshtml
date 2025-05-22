@@ -1,0 +1,131 @@
+﻿@model GestionAirPort.Models.Plane
+
+@{
+    ViewData["Title"] = "Nouvel Avion";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-plane-departure"></i> Ajouter un Nouvel Avion
+            </h3>
+        </div>
+        <div class="card-body bg-light">
+            <form asp-action="Create" class="needs-validation" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label asp-for="PlaneType" class="form-label fw-bold text-dark">
+                                <i class="fas fa-plane me-2"></i>Type d'Avion
+                            </label>
+                            <select asp-for="PlaneType" class="form-select shadow-sm" asp-items="ViewBag.PlaneType">
+                                <option value="">-- Sélectionner un type --</option>
+                            </select>
+                            <span asp-validation-for="PlaneType" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label asp-for="Capacity" class="form-label fw-bold text-dark">
+                                <i class="fas fa-users me-2"></i>Capacité
+                            </label>
+                            <div class="input-group shadow-sm">
+                                <input asp-for="Capacity" class="form-control" min="10" max="1000" />
+                                <span class="input-group-text bg-primary text-white">places</span>
+                            </div>
+                            <span asp-validation-for="Capacity" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group">
+                            <label asp-for="ManufactureDate" class="form-label fw-bold text-dark">
+                                <i class="fas fa-calendar-alt me-2"></i>Date de Fabrication
+                            </label>
+                            <input asp-for="ManufactureDate" class="form-control shadow-sm" type="date" />
+                            <span asp-validation-for="ManufactureDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-footer bg-transparent border-0">
+                        <button type="submit" class="btn btn-primary shadow">
+                            <i class="fas fa-save me-2"></i> Enregistrer
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary shadow ms-2">
+                            <i class="fas fa-arrow-left me-2"></i> Retour à la liste
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-label {
+        color: #2c3e50 !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-control, .form-select {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+
+    .input-group-text {
+        border: 1px solid #4e73df;
+    }
+
+    .card {
+        border: none;
+        margin-bottom: 1.5rem;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function() {
+            // Initialize select2
+            $('.form-select').select2({
+                theme: 'bootstrap-5',
+                dropdownParent: $('.card-body')
+            });
+
+            // Set max date to today
+            var today = new Date().toISOString().split('T')[0];
+            $('#ManufactureDate').attr('max', today);
+
+            // Add custom validation style
+            $('form').on('submit', function() {
+                $(this).addClass('was-validated');
+            });
+        });
+    </script>
+}

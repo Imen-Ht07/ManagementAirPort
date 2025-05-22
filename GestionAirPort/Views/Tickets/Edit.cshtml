@@ -1,0 +1,201 @@
+﻿@model GestionAirPort.Models.Ticket
+
+@{
+    ViewData["Title"] = "Modifier le Ticket";
+    var currentDateTime = "2025-05-22 09:24:05";
+    var currentUser = "Imen-Ht07";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2 text-primary"></i>
+                <span class="fw-bold text-primary">@currentUser</span>
+            </div>
+            <div>
+                <i class="fas fa-clock me-2 text-info"></i>
+                <span class="text-info">@currentDateTime UTC</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-header bg-warning text-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="card-title mb-0">
+                    <i class="fas fa-edit me-2"></i>Modifier le Ticket #@Model.TicketId
+                    @if (Model.VIP)
+                    {
+                        <span class="badge bg-light text-warning ms-2">
+                            <i class="fas fa-star"></i> VIP
+                        </span>
+                    }
+                </h3>
+                <span class="badge bg-light text-dark fs-5">@Model.Prix.ToString("C2")</span>
+            </div>
+        </div>
+
+        <form asp-action="Edit">
+            <div class="card-body py-4">
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                <input type="hidden" asp-for="TicketId" />
+
+                <div class="row g-4">
+                    <!-- Vol et Passager -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm hover-card">
+                            <div class="card-header bg-white">
+                                <h5 class="mb-0 text-warning">
+                                    <i class="fas fa-plane me-2"></i>Vol et Passager
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label asp-for="FlightFk" class="form-label required">Vol</label>
+                                    <select asp-for="FlightFk" asp-items="ViewBag.FlightFk" class="form-select">
+                                        <option value="">-- Sélectionner un vol --</option>
+                                    </select>
+                                    <span asp-validation-for="FlightFk" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="PassengerFk" class="form-label required">Passager</label>
+                                    <select asp-for="PassengerFk" asp-items="ViewBag.PassengerFk" class="form-select">
+                                        <option value="">-- Sélectionner un passager --</option>
+                                    </select>
+                                    <span asp-validation-for="PassengerFk" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Détails du Ticket -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm hover-card">
+                            <div class="card-header bg-white">
+                                <h5 class="mb-0 text-warning">
+                                    <i class="fas fa-info-circle me-2"></i>Détails du Ticket
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label asp-for="Prix" class="form-label required"></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">€</span>
+                                        <input asp-for="Prix" class="form-control" />
+                                    </div>
+                                    <span asp-validation-for="Prix" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Siege" class="form-label required"></label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">
+                                            <i class="fas fa-chair"></i>
+                                        </span>
+                                        <input asp-for="Siege" class="form-control" placeholder="ex: A12" />
+                                    </div>
+                                    <span asp-validation-for="Siege" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input asp-for="VIP" class="form-check-input"
+                                           role="switch" id="vipSwitch" />
+                                    <label class="form-check-label" for="vipSwitch">
+                                        Statut VIP
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Retour
+                        </a>
+                        <button type="submit" class="btn btn-warning">
+                            <i class="fas fa-save me-2"></i>Enregistrer
+                        </button>
+                    </div>
+                    <small class="text-muted">
+                        <i class="fas fa-history me-2"></i>
+                        Dernière modification: @currentDateTime
+                    </small>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .user-info-bar {
+        border-left: 4px solid #ffc107;
+        background: linear-gradient(to right, rgba(255,193,7,0.1), transparent);
+    }
+
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
+        }
+
+    .form-label {
+        font-weight: 500;
+        color: #495057;
+    }
+
+        .form-label.required::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+        }
+
+    .input-group-text {
+        background-color: #ffc107;
+        color: white;
+        border: none;
+    }
+
+    .form-check-input:checked {
+        background-color: #ffc107;
+        border-color: #ffc107;
+    }
+
+    .form-switch .form-check-input {
+        width: 3em;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+    }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+</style>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

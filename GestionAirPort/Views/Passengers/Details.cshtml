@@ -1,0 +1,198 @@
+﻿@model GestionAirPort.Models.Passenger
+
+@{
+    ViewData["Title"] = "Détails du Passager";
+    var currentUser = "Imen-Ht07";
+}
+
+<div class="container-fluid">
+    <!-- User Info Bar -->
+    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-user-circle me-2"></i>
+                <span class="fw-bold">@currentUser</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow text-dark">
+        <div class="card-header bg-info text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-user"></i> Détails du Passager #@Model.PassportNumber
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="row g-4">
+                <!-- Informations Personnelles -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm hover-card">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-info">
+                                <i class="fas fa-id-card me-2"></i>Informations Personnelles
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4 text-muted">Nom</dt>
+                                <dd class="col-sm-8">@Model.FullName.LastName</dd>
+
+                                <dt class="col-sm-4 text-muted">Prénom</dt>
+                                <dd class="col-sm-8">@Model.FullName.FirstName</dd>
+
+                                <dt class="col-sm-4 text-muted">Passeport</dt>
+                                <dd class="col-sm-8">
+                                    <span class="badge bg-primary">@Model.PassportNumber</span>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Naissance</dt>
+                                <dd class="col-sm-8">@Model.BirthDate.ToString("dd MMMM yyyy")</dd>
+
+                                <dt class="col-sm-4 text-muted">Âge</dt>
+                                <dd class="col-sm-8">
+                                    @{
+                                        var ageClass = Model.Age < 30 ? "bg-success" :
+                                        Model.Age < 50 ? "bg-info" :
+                                        "bg-secondary";
+                                    }
+                                    <span class="badge @ageClass">@Model.Age ans</span>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm hover-card">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 text-info">
+                                <i class="fas fa-address-book me-2"></i>Contact
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4 text-muted">Téléphone</dt>
+                                <dd class="col-sm-8">
+                                    <a href="tel:@Model.TelNumber" class="text-decoration-none">
+                                        <i class="fas fa-phone me-2"></i>@Model.TelNumber
+                                    </a>
+                                </dd>
+
+                                <dt class="col-sm-4 text-muted">Email</dt>
+                                <dd class="col-sm-8">
+                                    <a href="mailto:@Model.EmailAddress" class="text-decoration-none">
+                                        <i class="fas fa-envelope me-2"></i>@Model.EmailAddress
+                                    </a>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tickets -->
+            @if (Model.Tickets != null && Model.Tickets.Any())
+            {
+                <div class="card mt-4 shadow-sm hover-card">
+                    <div class="card-header bg-white">
+                        <h5 class="mb-0 text-info">
+                            <i class="fas fa-ticket-alt me-2"></i>
+                            Tickets Réservés (@Model.Tickets.Count)
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th><i class="fas fa-plane me-2"></i>Vol</th>
+                                        <th><i class="fas fa-map-marker-alt me-2"></i>Départ</th>
+                                        <th><i class="fas fa-map-marker me-2"></i>Destination</th>
+                                        <th><i class="fas fa-calendar me-2"></i>Date</th>
+                                        <th><i class="fas fa-chair me-2"></i>Siège</th>
+                                        <th><i class="fas fa-tag me-2"></i>Prix</th>
+                                        <th><i class="fas fa-star me-2"></i>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ticket in Model.Tickets.OrderByDescending(t => t.Flight.FlightDate))
+                                    {
+                                        <tr>
+                                            <td>@ticket.Flight.FlightId</td>
+                                            <td>@ticket.Flight.Departure</td>
+                                            <td>@ticket.Flight.Destination</td>
+                                            <td>@ticket.Flight.FlightDate.ToString("dd/MM HH:mm")</td>
+                                            <td>@ticket.Siege</td>
+                                            <td>@ticket.Prix.ToString("C2")</td>
+                                            <td>
+                                                @if (ticket.VIP)
+                                                {
+                                                    <span class="badge bg-warning">
+                                                        <i class="fas fa-star me-1"></i>VIP
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-secondary">Standard</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Aucun ticket réservé pour ce passager.
+                </div>
+            }
+        </div>
+
+        <div class="card-footer bg-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Retour
+                    </a>
+                    <a asp-action="Edit" asp-route-id="@Model.PassportNumber" class="btn btn-warning">
+                        <i class="fas fa-edit me-2"></i>Modifier
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .user-info-bar {
+        border-left: 4px solid #17a2b8;
+    }
+
+    .hover-card {
+        transition: all 0.3s ease;
+    }
+
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15)!important;
+    }
+
+    .badge {
+        padding: 0.5em 1em;
+    }
+
+    .table th {
+        background-color: rgba(0,147,233,0.1);
+        color: #0093E9;
+    }
+
+    .table tbody tr:hover {
+        background-color: rgba(0,147,233,0.05);
+    }
+</style>

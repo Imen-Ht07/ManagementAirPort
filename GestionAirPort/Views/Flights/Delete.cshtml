@@ -1,0 +1,88 @@
+﻿@model GestionAirPort.Models.Flight
+
+@{
+    ViewData["Title"] = "Supprimer le Vol";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header bg-danger text-white">
+            <h3 class="card-title mb-0">
+                <i class="fas fa-exclamation-triangle"></i> Confirmer la suppression
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <h4 class="alert-heading">Attention!</h4>
+                <p>Êtes-vous sûr de vouloir supprimer ce vol ? Cette action est irréversible.</p>
+                @if (Model.Tickets != null && Model.Tickets.Any())
+                {
+                    <hr>
+                    <p class="mb-0">
+                        <strong>Attention:</strong> Ce vol a @Model.Tickets.Count ticket(s) associé(s).
+                        La suppression entraînera également la suppression de tous les tickets.
+                    </p>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Détails du Vol</h5>
+                        </div>
+                        <div class="card-body">
+                            <dl class="row">
+                                <dt class="col-sm-4">N° de Vol</dt>
+                                <dd class="col-sm-8">@Model.FlightId</dd>
+
+                                <dt class="col-sm-4">Départ</dt>
+                                <dd class="col-sm-8">@Model.Departure</dd>
+
+                                <dt class="col-sm-4">Destination</dt>
+                                <dd class="col-sm-8">@Model.Destination</dd>
+
+                                <dt class="col-sm-4">Date de départ</dt>
+                                <dd class="col-sm-8">@Model.FlightDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                                <dt class="col-sm-4">Durée</dt>
+                                <dd class="col-sm-8">@Model.EstimatedDuration minutes</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Informations de l'Avion</h5>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.Plane != null)
+                            {
+                                <dl class="row">
+                                    <dt class="col-sm-4">Type</dt>
+                                    <dd class="col-sm-8">@Model.Plane.PlaneType</dd>
+
+                                    <dt class="col-sm-4">Capacité</dt>
+                                    <dd class="col-sm-8">@Model.Plane.Capacity passagers</dd>
+                                </dl>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="FlightId" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Confirmer la suppression
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour à la liste
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
