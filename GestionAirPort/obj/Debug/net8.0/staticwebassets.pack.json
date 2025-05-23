@@ -249,6 +249,14 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\uploads\\images255414337.png",
+      "PackagePath": "staticwebassets\\uploads\\images255414337.png"
+    },
+    {
+      "Id": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\uploads\\tunisair-vector-logo253012232.png",
+      "PackagePath": "staticwebassets\\uploads\\tunisair-vector-logo253012232.png"
+    },
+    {
       "Id": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\uploads\\tunisair-vector-logo254717602.png",
       "PackagePath": "staticwebassets\\uploads\\tunisair-vector-logo254717602.png"
     },

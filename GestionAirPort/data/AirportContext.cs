@@ -89,6 +89,11 @@ namespace GestionAirPort.data
                       .HasForeignKey(t => t.PassengerFk)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+            // Lier ApplicationUser à Passenger
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(u => u.Passenger)
+                .WithOne()
+                .HasForeignKey<ApplicationUser>("PassportNumber");
 
             base.OnModelCreating(modelBuilder);
         }
@@ -129,6 +134,7 @@ namespace GestionAirPort.data
                   .WithOne(t => t.Flight)
                   .HasForeignKey(t => t.FlightFk)
                   .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 }

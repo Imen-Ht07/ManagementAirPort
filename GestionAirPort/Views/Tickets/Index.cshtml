@@ -1,100 +1,125 @@
 ﻿@model IEnumerable<GestionAirPort.Models.Ticket>
-
 @{
     ViewData["Title"] = "Liste des Tickets";
-    var currentUser = "Imen-Ht07";
 }
 
 <div class="container-fluid">
-    <!-- User Info Bar -->
-    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <i class="fas fa-user-circle me-2 text-primary"></i>
-                <span class="fw-bold text-primary">@currentUser</span>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body text-dark">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>@ViewBag.Statistics.TotalTickets</h3>
+                            <p>Total Tickets</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <h3>@ViewBag.Statistics.VipTickets</h3>
+                            <p>Tickets VIP</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3>@ViewBag.Statistics.TotalRevenue.ToString("C2")</h3>
+                            <p>Revenu Total</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="small-box bg-primary">
+                        <div class="inner">
+                            <h3>@ViewBag.Statistics.AveragePrice.ToString("C2")</h3>
+                            <p>Prix Moyen</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="card shadow text-dark">
-        <div class="card-header bg-info text-white py-3">
+    <div class="card">
+        <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
-                <h3 class="card-title mb-0">
-                    <i class="fas fa-ticket-alt me-2"></i>Liste des Tickets
-                </h3>
-                <a asp-action="Create" class="btn btn-light">
-                    <i class="fas fa-plus me-2"></i>Nouveau Ticket
-                </a>
+                <div>
+                    <a asp-action="Create" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Nouveau Ticket
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <form asp-action="Search" method="get" class="d-flex">
+                        <input type="text" name="query" class="form-control me-2" placeholder="Rechercher..."
+                               value="@ViewBag.SearchQuery">
+                        <button type="submit" class="btn btn-outline-primary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
-
-        <div class="card-body p-0">
+        <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead class="bg-light">
+                <table class="table table-striped table-hover">
+                    <thead>
                         <tr>
-                            <th><i class="fas fa-hashtag me-2"></i>N°</th>
-                            <th><i class="fas fa-user me-2"></i>Passager</th>
-                            <th><i class="fas fa-plane me-2"></i>Vol</th>
-                            <th><i class="fas fa-map-marker-alt me-2"></i>Trajet</th>
-                            <th><i class="fas fa-calendar me-2"></i>Date</th>
-                            <th><i class="fas fa-chair me-2"></i>Siège</th>
-                            <th><i class="fas fa-tag me-2"></i>Prix</th>
-                            <th><i class="fas fa-star me-2"></i>Statut</th>
-                            <th><i class="fas fa-cogs me-2"></i>Actions</th>
+                            <th>@Html.DisplayNameFor(model => model.TicketInfo)</th>
+                            <th>@Html.DisplayNameFor(model => model.Passenger)</th>
+                            <th>@Html.DisplayNameFor(model => model.Flight)</th>
+                            <th>@Html.DisplayNameFor(model => model.Prix)</th>
+                            <th>@Html.DisplayNameFor(model => model.Status)</th>
+                            <th>@Html.DisplayNameFor(model => model.CreatedAt)</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var ticket in Model)
+                        @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@ticket.TicketId</td>
+                                <td>@Html.DisplayFor(modelItem => item.TicketInfo)</td>
                                 <td>
-                                    <a asp-controller="Passengers" asp-action="Details" 
-                                       asp-route-id="@ticket.PassengerFk" class="text-decoration-none">
-                                        @ticket.Passenger.FullName.FirstName @ticket.Passenger.FullName.LastName
-                                    </a>
+                                    @if (item.Passenger != null)
+                                    {
+                                        @($"{item.Passenger.FullName.LastName} {item.Passenger.FullName.FirstName}")
+                                    }
                                 </td>
                                 <td>
-                                    <a asp-controller="Flights" asp-action="Details" 
-                                       asp-route-id="@ticket.FlightFk" class="text-decoration-none">
-                                        Vol #@ticket.FlightFk
-                                    </a>
+                                    @if (item.Flight != null)
+                                    {
+                                        @($"Vol {item.Flight.FlightId} - {item.Flight.Departure} → {item.Flight.Destination}")
+                                    }
                                 </td>
+                                <td>@Html.DisplayFor(modelItem => item.FormattedPrice)</td>
                                 <td>
-                                    <span class="text-muted">
-                                        @ticket.Flight.Departure → @ticket.Flight.Destination
+                                    <span class="badge @(item.Status == TicketStatus.Active ? "bg-success" :
+                                                      item.Status == TicketStatus.Cancelled ? "bg-danger" : "bg-secondary")">
+                                        @Html.DisplayFor(modelItem => item.Status)
                                     </span>
                                 </td>
-                                <td>@ticket.Flight.FlightDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</td>
                                 <td>
-                                    <span class="badge bg-info">@ticket.Siege</span>
-                                </td>
-                                <td>@ticket.Prix.ToString("C2")</td>
-                                <td>
-                                    @if (ticket.VIP)
-                                    {
-                                        <span class="badge bg-warning">
-                                            <i class="fas fa-star me-1"></i>VIP
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="badge bg-secondary">Standard</span>
-                                    }
-                                </td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <a asp-action="Details" asp-route-id="@ticket.TicketId" 
-                                           class="btn btn-outline-info" title="Détails">
-                                            <i class="fas fa-eye"></i>
+                                    <div class="btn-group">
+                                        <a asp-action="Details" asp-route-id="@item.TicketId"
+                                           class="btn btn-info btn-sm" title="Détails">
+                                            <i class="fas fa-info-circle"></i>
                                         </a>
-                                        <a asp-action="Edit" asp-route-id="@ticket.TicketId" 
-                                           class="btn btn-outline-warning" title="Modifier">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a asp-action="Delete" asp-route-id="@ticket.TicketId" 
-                                           class="btn btn-outline-danger" title="Supprimer">
+                                        @if (item.CanBeModified)
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.TicketId"
+                                               class="btn btn-warning btn-sm" title="Modifier">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        }
+                                        <a asp-action="Delete" asp-route-id="@item.TicketId"
+                                           class="btn btn-danger btn-sm" title="Supprimer">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </div>
@@ -105,42 +130,15 @@
                 </table>
             </div>
         </div>
-
-        <div class="card-footer bg-white py-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <span class="text-muted">
-                    Total: @Model.Count() ticket(s)
-                </span>
-            </div>
-        </div>
     </div>
 </div>
 
-<style>
-    .user-info-bar {
-        border-left: 4px solid #17a2b8;
-        background: linear-gradient(to right, rgba(23,162,184,0.1), transparent);
-    }
-
-    .table th {
-        white-space: nowrap;
-        background-color: rgba(23,162,184,0.1);
-    }
-
-    .table td {
-        vertical-align: middle;
-    }
-
-    .btn-group .btn {
-        padding: 0.25rem 0.5rem;
-    }
-
-    .badge {
-        padding: 0.5em 1em;
-    }
-
-    .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
-</style>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 3000);
+        });
+    </script>
+}

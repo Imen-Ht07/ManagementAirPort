@@ -1,12 +1,41 @@
 ﻿using GestionAirPort.data;
+using GestionAirPort.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Net.WebSockets;
-
+using GestionAirPort.Constants;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // ✅ Configuration de la connexion à SQL Server
 builder.Services.AddDbContext<AirportContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// ✅ Configuration Identity avec EntityFramework
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 6;
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = false;
+})
+.AddEntityFrameworkStores<AirportContext>() // Ajout important !
+.AddDefaultTokenProviders();
+
+// ✅ Configuration des cookies d'authentification
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.LogoutPath = "/Account/Logout";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(7);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
 
 // ✅ Activation de CORS
 builder.Services.AddCors(options =>
@@ -19,12 +48,12 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ✅ Ajout du support MVC
+// ✅ Ajout du support MVC avec vues
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// ✅ Gestion des erreurs et HTTPS
+// ✅ Configuration de l'environnement
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -34,22 +63,21 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// ✅ Activation WebSocket avec options
+// ✅ Configuration WebSocket
 app.UseWebSockets(new WebSocketOptions
 {
     KeepAliveInterval = TimeSpan.FromSeconds(120)
 });
 
-// ✅ Activation CORS
 app.UseCors("AllowAll");
 
-// ✅ Middleware WebSocket : accepte les connexions
+// ✅ Middleware WebSocket
 app.Use(async (context, next) =>
 {
     if (context.WebSockets.IsWebSocketRequest)
     {
         using var webSocket = await context.WebSockets.AcceptWebSocketAsync();
-        await HandleWebSocket(context, webSocket); // Fonction de gestion
+        await HandleWebSocket(context, webSocket);
     }
     else
     {
@@ -58,9 +86,58 @@ app.Use(async (context, next) =>
 });
 
 app.UseRouting();
+
+// ✅ Configuration Authentication/Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
-// ✅ Routes spécifiques pour les contrôleurs
+// ✅ Initialisation des rôles et admin
+using (var scope = app.Services.CreateScope())
+{
+    try
+    {
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+        // Création des rôles
+        foreach (var role in Roles.All)
+        {
+            if (!await roleManager.RoleExistsAsync(role))
+            {
+                await roleManager.CreateAsync(new IdentityRole(role));
+            }
+        }
+
+        // Création admin par défaut
+        var adminEmail = "airport@gmail.com";
+        if (await userManager.FindByEmailAsync(adminEmail) == null)
+        {
+            var admin = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                FirstName = "Admin",
+                LastName = "System",
+                EmailConfirmed = true,
+                IsActive = true,
+                CreatedAt = DateTime.Parse("2025-05-22 18:33:27")
+            };
+
+            var result = await userManager.CreateAsync(admin, "Admin@123");
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(admin, Roles.Administrator);
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Une erreur s'est produite lors de l'initialisation des rôles et de l'administrateur.");
+    }
+}
+
+// ✅ Configuration des routes
 app.MapControllerRoute(
     name: "planes",
     pattern: "Planes/{action=Index}/{id?}",
@@ -91,26 +168,47 @@ app.MapControllerRoute(
     pattern: "Tickets/{action=Index}/{id?}",
     defaults: new { controller = "Tickets" });
 
-// ✅ Route par défaut
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
 
-// ✅ Méthode de gestion WebSocket simple (echo)
+// ✅ Gestion WebSocket
 static async Task HandleWebSocket(HttpContext context, WebSocket webSocket)
 {
-    var buffer = new byte[1024 * 4];
-    WebSocketReceiveResult result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
-
-    while (!result.CloseStatus.HasValue)
+    try
     {
-        await webSocket.SendAsync(new ArraySegment<byte>(buffer, 0, result.Count),
-            result.MessageType, result.EndOfMessage, CancellationToken.None);
+        var buffer = new byte[1024 * 4];
+        WebSocketReceiveResult result = await webSocket.ReceiveAsync(
+            new ArraySegment<byte>(buffer), CancellationToken.None);
 
-        result = await webSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+        while (!result.CloseStatus.HasValue)
+        {
+            await webSocket.SendAsync(
+                new ArraySegment<byte>(buffer, 0, result.Count),
+                result.MessageType,
+                result.EndOfMessage,
+                CancellationToken.None);
+
+            result = await webSocket.ReceiveAsync(
+                new ArraySegment<byte>(buffer), CancellationToken.None);
+        }
+
+        await webSocket.CloseAsync(
+            result.CloseStatus.Value,
+            result.CloseStatusDescription,
+            CancellationToken.None);
     }
-
-    await webSocket.CloseAsync(result.CloseStatus.Value, result.CloseStatusDescription, CancellationToken.None);
+    catch (Exception ex)
+    {
+        // Log l'erreur
+        if (webSocket.State == WebSocketState.Open)
+        {
+            await webSocket.CloseAsync(
+                WebSocketCloseStatus.InternalServerError,
+                "Une erreur s'est produite",
+                CancellationToken.None);
+        }
+    }
 }

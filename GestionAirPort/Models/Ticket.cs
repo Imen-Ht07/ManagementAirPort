@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace GestionAirPort.Models
 {
@@ -12,6 +13,7 @@ namespace GestionAirPort.Models
         [Range(0, 10000, ErrorMessage = "Le prix doit être entre 0 et 10000")]
         [Display(Name = "Prix")]
         [Column(TypeName = "decimal(18,2)")]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         public decimal Prix { get; set; }
 
         [Required(ErrorMessage = "Le numéro de siège est obligatoire")]
@@ -23,6 +25,18 @@ namespace GestionAirPort.Models
         [Display(Name = "Statut VIP")]
         public bool VIP { get; set; }
 
+        [Display(Name = "Date de Création")]
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+        [Display(Name = "Dernière Modification")]
+        [DataType(DataType.DateTime)]
+        public DateTime? UpdatedAt { get; set; }
+
+        [Display(Name = "Statut")]
+        public TicketStatus Status { get; set; } = TicketStatus.Active;
+
+        // Relations
         [Required(ErrorMessage = "Le passager est obligatoire")]
         [Display(Name = "Passager")]
         public virtual Passenger Passenger { get; set; }
@@ -41,7 +55,24 @@ namespace GestionAirPort.Models
         [ForeignKey("Flight")]
         public int FlightFk { get; set; }
 
+        // Propriétés calculées
         [NotMapped]
         public string TicketInfo => $"Vol {FlightFk} - Siège {Siege} {(VIP ? "(VIP)" : "")}";
+
+        [NotMapped]
+        public string FormattedPrice => $"{Prix:C2}";
+
+        [NotMapped]
+        public bool CanBeModified => Status == TicketStatus.Active && Flight?.FlightDate > DateTime.UtcNow;
+    }
+
+    public enum TicketStatus
+    {
+        [Display(Name = "Actif")]
+        Active,
+        [Display(Name = "Annulé")]
+        Cancelled,
+        [Display(Name = "Utilisé")]
+        Used
     }
 }

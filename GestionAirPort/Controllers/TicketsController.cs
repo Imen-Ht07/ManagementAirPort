@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GestionAirPort.Models;
 using GestionAirPort.data;
+using System.Globalization;
 
 namespace GestionAirPort.Controllers
 {
     public class TicketsController : Controller
     {
         private readonly AirportContext _context;
+        private const decimal VIP_SURCHARGE_PERCENTAGE = 0.5M;
 
         public TicketsController(AirportContext context)
         {
@@ -22,17 +24,27 @@ namespace GestionAirPort.Controllers
             {
                 var tickets = await _context.Tickets
                     .Include(t => t.Flight)
+                        .ThenInclude(f => f.Plane)
                     .Include(t => t.Passenger)
                         .ThenInclude(p => p.FullName)
-                    .OrderBy(t => t.Flight.FlightDate)
+                    .OrderByDescending(t => t.Flight.FlightDate)
+                    .AsNoTracking() // Amélioration des performances pour la lecture seule
                     .ToListAsync();
+
+                ViewBag.Statistics = new
+                {
+                    TotalTickets = tickets.Count,
+                    VipTickets = tickets.Count(t => t.VIP),
+                    TotalRevenue = tickets.Sum(t => t.Prix),
+                    AveragePrice = tickets.Any() ? tickets.Average(t => t.Prix) : 0
+                };
 
                 return View(tickets);
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Erreur lors du chargement des tickets: " + ex.Message;
-                return View(new List<Ticket>());
+                TempData["Error"] = $"Erreur lors du chargement des tickets: {ex.Message}";
+                return View(Enumerable.Empty<Ticket>());
             }
         }
 
@@ -41,27 +53,30 @@ namespace GestionAirPort.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("ID du ticket non spécifié");
             }
 
             try
             {
                 var ticket = await _context.Tickets
                     .Include(t => t.Flight)
+                        .ThenInclude(f => f.Plane)
                     .Include(t => t.Passenger)
                         .ThenInclude(p => p.FullName)
+                    .AsNoTracking()
                     .FirstOrDefaultAsync(m => m.TicketId == id);
 
                 if (ticket == null)
                 {
-                    return NotFound();
+                    return NotFound("Ticket non trouvé");
                 }
+
 
                 return View(ticket);
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Erreur lors du chargement du ticket: " + ex.Message;
+                TempData["Error"] = $"Erreur lors du chargement du ticket: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -71,12 +86,17 @@ namespace GestionAirPort.Controllers
         {
             try
             {
-                PrepareSelectLists();
-                return View(new Ticket { VIP = false }); // Valeur par défaut pour VIP
+                PrepareCreateViewData();
+                return View(new Ticket
+                {
+                    VIP = false,
+                    Prix = 0,
+    
+                });
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Erreur lors de la préparation du formulaire: " + ex.Message;
+                TempData["Error"] = $"Erreur lors de la préparation du formulaire: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -90,25 +110,15 @@ namespace GestionAirPort.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    // Vérifier si le siège est déjà pris pour ce vol
-                    if (await IsSeatTaken(ticket.FlightFk, ticket.Siege))
+                    if (!await ValidateTicketCreation(ticket))
                     {
-                        ModelState.AddModelError("Siege", "Ce siège est déjà occupé pour ce vol");
-                        PrepareSelectLists(ticket.FlightFk, ticket.PassengerFk);
+                        PrepareCreateViewData();
                         return View(ticket);
                     }
 
-                    // Vérifier la capacité de l'avion
-                    var flight = await _context.Flights
-                        .Include(f => f.Plane)
-                        .Include(f => f.Tickets)
-                        .FirstOrDefaultAsync(f => f.FlightId == ticket.FlightFk);
-
-                    if (flight != null && flight.Tickets.Count >= flight.Plane.Capacity)
+                    if (ticket.VIP)
                     {
-                        ModelState.AddModelError("FlightFk", "Ce vol est complet");
-                        PrepareSelectLists(ticket.FlightFk, ticket.PassengerFk);
-                        return View(ticket);
+                        ticket.Prix = CalculateVipPrice(ticket.Prix);
                     }
 
                     _context.Add(ticket);
@@ -119,10 +129,10 @@ namespace GestionAirPort.Controllers
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Une erreur s'est produite: " + ex.Message);
+                ModelState.AddModelError(string.Empty, $"Une erreur s'est produite: {ex.Message}");
             }
 
-            PrepareSelectLists(ticket.FlightFk, ticket.PassengerFk);
+            PrepareCreateViewData();
             return View(ticket);
         }
 
@@ -131,7 +141,7 @@ namespace GestionAirPort.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("ID du ticket non spécifié");
             }
 
             try
@@ -143,15 +153,21 @@ namespace GestionAirPort.Controllers
 
                 if (ticket == null)
                 {
-                    return NotFound();
+                    return NotFound("Ticket non trouvé");
                 }
 
-                PrepareSelectLists(ticket.FlightFk, ticket.PassengerFk);
+                if (!ticket.CanBeModified)
+                {
+                    TempData["Error"] = "Ce ticket ne peut plus être modifié.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                PrepareEditViewData(ticket);
                 return View(ticket);
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Erreur lors du chargement du ticket: " + ex.Message;
+                TempData["Error"] = $"Erreur lors du chargement du ticket: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -159,26 +175,41 @@ namespace GestionAirPort.Controllers
         // POST: Tickets/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TicketId,Prix,Siege,VIP,PassengerFk,FlightFk")] Ticket ticket)
+        public async Task<IActionResult> Edit(int id, [Bind("TicketId,Prix,Siege,VIP,PassengerFk,FlightFk,Status")] Ticket ticket)
         {
             if (id != ticket.TicketId)
             {
-                return NotFound();
+                return NotFound("ID du ticket invalide");
             }
 
             try
             {
                 if (ModelState.IsValid)
                 {
-                    // Vérifier si le siège est déjà pris (sauf par le ticket actuel)
-                    if (await IsSeatTaken(ticket.FlightFk, ticket.Siege, ticket.TicketId))
+                    if (!await ValidateTicketEdit(ticket))
                     {
-                        ModelState.AddModelError("Siege", "Ce siège est déjà occupé pour ce vol");
-                        PrepareSelectLists(ticket.FlightFk, ticket.PassengerFk);
+                        PrepareEditViewData(ticket);
                         return View(ticket);
                     }
 
-                    _context.Update(ticket);
+                    var existingTicket = await _context.Tickets.FindAsync(id);
+                    if (existingTicket == null)
+                    {
+                        return NotFound("Ticket non trouvé");
+                    }
+
+                    if (!existingTicket.CanBeModified)
+                    {
+                        TempData["Error"] = "Ce ticket ne peut plus être modifié.";
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    // Mise à jour des propriétés modifiables
+                    existingTicket.Prix = ticket.VIP ? CalculateVipPrice(ticket.Prix) : ticket.Prix;
+                    existingTicket.Siege = ticket.Siege;
+                    existingTicket.VIP = ticket.VIP;        
+                    existingTicket.Status = ticket.Status;
+
                     await _context.SaveChangesAsync();
                     TempData["Success"] = "Ticket modifié avec succès!";
                     return RedirectToAction(nameof(Index));
@@ -188,19 +219,17 @@ namespace GestionAirPort.Controllers
             {
                 if (!TicketExists(ticket.TicketId))
                 {
-                    return NotFound();
+                    return NotFound("Ticket non trouvé");
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "Une erreur s'est produite: " + ex.Message);
+                ModelState.AddModelError(string.Empty, $"Une erreur s'est produite: {ex.Message}");
             }
 
-            PrepareSelectLists(ticket.FlightFk, ticket.PassengerFk);
+ 
+            PrepareEditViewData(ticket);
             return View(ticket);
         }
 
@@ -209,32 +238,33 @@ namespace GestionAirPort.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return NotFound("ID du ticket non spécifié");
             }
 
             try
             {
                 var ticket = await _context.Tickets
                     .Include(t => t.Flight)
+                        .ThenInclude(f => f.Plane)
                     .Include(t => t.Passenger)
                         .ThenInclude(p => p.FullName)
+                    .AsNoTracking()
                     .FirstOrDefaultAsync(m => m.TicketId == id);
 
                 if (ticket == null)
                 {
-                    return NotFound();
+                    return NotFound("Ticket non trouvé");
                 }
 
                 return View(ticket);
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Erreur lors du chargement du ticket: " + ex.Message;
+                TempData["Error"] = $"Erreur lors du chargement du ticket: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
 
-        // POST: Tickets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -242,55 +272,228 @@ namespace GestionAirPort.Controllers
             try
             {
                 var ticket = await _context.Tickets.FindAsync(id);
-                if (ticket != null)
+                if (ticket == null)
                 {
-                    _context.Tickets.Remove(ticket);
-                    await _context.SaveChangesAsync();
-                    TempData["Success"] = "Ticket supprimé avec succès!";
+                    return NotFound("Ticket non trouvé");
                 }
-                return RedirectToAction(nameof(Index));
+
+                _context.Tickets.Remove(ticket);
+                await _context.SaveChangesAsync();
+                TempData["Success"] = "Ticket supprimé avec succès!";
             }
             catch (Exception ex)
             {
-                TempData["Error"] = "Erreur lors de la suppression: " + ex.Message;
+                TempData["Error"] = $"Erreur lors de la suppression: {ex.Message}";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // API Endpoints avec amélioration de la validation et des réponses
+        [HttpGet]
+        public async Task<IActionResult> GetFlightDetails(int flightId)
+        {
+            if (flightId <= 0)
+            {
+                return BadRequest("ID de vol invalide");
+            }
+
+            try
+            {
+                var flight = await _context.Flights
+                    .Include(f => f.Plane)
+                    .Include(f => f.Tickets)
+                    .Where(f => f.FlightId == flightId)
+                    .Select(f => new
+                    {
+                        f.FlightId,
+                        f.Departure,
+                        f.Destination,
+                        FlightDate = f.FlightDate.ToString("dd/MM/yyyy HH:mm"),
+                        AvailableSeats = f.Plane.Capacity - f.Tickets.Count,
+                        PlaneCapacity = f.Plane.Capacity,
+                        IsFull = f.Tickets.Count >= f.Plane.Capacity
+                    })
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync();
+
+                if (flight == null)
+                {
+                    return NotFound("Vol non trouvé");
+                }
+
+                return Json(flight);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur serveur: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CheckSeatAvailability(int flightId, string seat)
+        {
+            if (flightId <= 0 || string.IsNullOrEmpty(seat))
+            {
+                return BadRequest("Paramètres invalides");
+            }
+
+            try
+            {
+                var isTaken = await IsSeatTaken(flightId, seat);
+                return Json(new { isAvailable = !isTaken });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erreur serveur: {ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string query)
+        {
+            try
+            {
+                var tickets = await _context.Tickets
+                    .Include(t => t.Flight)
+                        .ThenInclude(f => f.Plane)
+                    .Include(t => t.Passenger)
+                        .ThenInclude(p => p.FullName)
+                    .Where(t =>
+                        (t.Passenger.FullName.LastName.Contains(query) ||
+                        t.Passenger.FullName.FirstName.Contains(query) ||
+                        t.Flight.Departure.Contains(query) ||
+                        t.Flight.Destination.Contains(query) ||
+                        t.Siege.Contains(query)) &&
+                        t.Status != TicketStatus.Cancelled)
+                    .OrderByDescending(t => t.Flight.FlightDate)
+                    .AsNoTracking()
+                    .ToListAsync();
+
+                ViewBag.SearchQuery = query;
+                return View("Index", tickets);
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = $"Erreur lors de la recherche: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }
 
-        private bool TicketExists(int id)
+        // Méthodes privées
+  
+        private async Task<bool> ValidateTicketCreation(Ticket ticket)
         {
-            return _context.Tickets.Any(e => e.TicketId == id);
+            var flight = await _context.Flights
+                .Include(f => f.Plane)
+                .Include(f => f.Tickets)
+                .FirstOrDefaultAsync(f => f.FlightId == ticket.FlightFk);
+
+            if (flight == null || flight.Tickets.Count >= flight.Plane.Capacity)
+            {
+                ModelState.AddModelError("FlightFk", "Ce vol n'est pas disponible ou est complet");
+                return false;
+            }
+
+            if (await IsSeatTaken(ticket.FlightFk, ticket.Siege))
+            {
+                ModelState.AddModelError("Siege", "Ce siège est déjà occupé");
+                return false;
+            }
+
+            return true;
+        }
+
+        private async Task<bool> ValidateTicketEdit(Ticket ticket)
+        {
+            var flight = await _context.Flights
+                .Include(f => f.Plane)
+                .Include(f => f.Tickets)
+                .FirstOrDefaultAsync(f => f.FlightId == ticket.FlightFk);
+
+            if (flight == null)
+            {
+                ModelState.AddModelError("FlightFk", "Vol non trouvé");
+                return false;
+            }
+
+            if (await IsSeatTaken(ticket.FlightFk, ticket.Siege, ticket.TicketId))
+            {
+                ModelState.AddModelError("Siege", "Ce siège est déjà occupé");
+                return false;
+            }
+
+            return true;
         }
 
         private async Task<bool> IsSeatTaken(int flightId, string seat, int? excludeTicketId = null)
         {
-            return await _context.Tickets
-                .AnyAsync(t => t.FlightFk == flightId
-                    && t.Siege == seat
-                    && (!excludeTicketId.HasValue || t.TicketId != excludeTicketId.Value));
+            var query = _context.Tickets
+                .Where(t => t.FlightFk == flightId &&
+                           t.Siege == seat &&
+                           t.Status != TicketStatus.Cancelled);
+
+            if (excludeTicketId.HasValue)
+            {
+                query = query.Where(t => t.TicketId != excludeTicketId.Value);
+            }
+
+            return await query.AnyAsync();
         }
 
-        private void PrepareSelectLists(int? selectedFlightId = null, string selectedPassengerId = null)
+        private void PrepareCreateViewData()
         {
-            // Préparer la liste des vols avec plus d'informations
-            ViewData["FlightFk"] = new SelectList(_context.Flights
-                .Include(f => f.Plane)
-                .OrderBy(f => f.FlightDate)
-                .Select(f => new
-                {
-                    f.FlightId,
-                    Description = $"Vol {f.FlightId} - {f.Departure} → {f.Destination} - {f.FlightDate:dd/MM/yyyy HH:mm}"
-                }), "FlightId", "Description", selectedFlightId);
+            try
+            {
+                var flights = _context.Flights
+                    .Include(f => f.Plane)
+                    .Include(f => f.Tickets)
+                    .Where(f =>
+                        f.FlightDate > DateTime.Now &&
+                        f.Tickets.Count(t => t.Status != TicketStatus.Cancelled) < f.Plane.Capacity)
+                    .OrderBy(f => f.FlightDate)
+                    .AsNoTracking()
+                    .Select(f => new SelectListItem
+                    {
+                        Value = f.FlightId.ToString(),
+                        Text = $"Vol {f.FlightId} - {f.Departure} → {f.Destination} - {f.FlightDate:dd/MM/yyyy HH:mm} ({f.Plane.Capacity - f.Tickets.Count(t => t.Status != TicketStatus.Cancelled)} places)"
+                    })
+                    .ToList();
 
-            // Préparer la liste des passagers avec plus d'informations
-            ViewData["PassengerFk"] = new SelectList(_context.Passengers
-                .Include(p => p.FullName)
-                .OrderBy(p => p.FullName.FirstName)
-                .Select(p => new
-                {
-                    p.PassportNumber,
-                    Description = $"{p.FullName.FirstName} {p.FullName.LastName} ({p.PassportNumber})"
-                }), "PassportNumber", "Description", selectedPassengerId);
+                var passengers = _context.Passengers
+                    .Include(p => p.FullName)
+                    .OrderBy(p => p.FullName.LastName)
+                    .AsNoTracking()
+                    .Select(p => new SelectListItem
+                    {
+                        Value = p.PassportNumber,
+                        Text = $"{p.FullName.LastName} {p.FullName.FirstName} ({p.PassportNumber})"
+                    })
+                    .ToList();
+
+                ViewBag.FlightFk = flights;
+                ViewBag.PassengerFk = passengers;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erreur lors de la préparation des données: {ex.Message}");
+            }
         }
+
+        private void PrepareEditViewData(Ticket ticket)
+        {
+            PrepareCreateViewData();
+            if (ticket != null)
+            {
+                ViewBag.CurrentFlight = ticket.Flight;
+                ViewBag.CurrentPassenger = ticket.Passenger;
+                ViewBag.SelectedFlightId = ticket.FlightFk;
+                ViewBag.SelectedPassengerId = ticket.PassengerFk;
+            }
+        }
+
+        private decimal CalculateVipPrice(decimal basePrice) => basePrice * (1 + VIP_SURCHARGE_PERCENTAGE);
+
+        private bool TicketExists(int id) => _context.Tickets.Any(e => e.TicketId == id);
     }
 }

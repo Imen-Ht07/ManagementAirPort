@@ -22,6 +22,80 @@ namespace GestionAirPort.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("GestionAirPort.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastLogin")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PassportNumber")
+                        .HasColumnType("nvarchar(7)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PassportNumber")
+                        .IsUnique()
+                        .HasFilter("[PassportNumber] IS NOT NULL");
+
+                    b.ToTable("ApplicationUser");
+                });
+
             modelBuilder.Entity("GestionAirPort.Models.Flight", b =>
                 {
                     b.Property<int>("FlightId")
@@ -31,16 +105,17 @@ namespace GestionAirPort.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FlightId"));
 
                     b.Property<string>("AirlineLogo")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Departure")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Destination")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("EffectiveArrival")
                         .HasColumnType("datetime");
@@ -95,7 +170,8 @@ namespace GestionAirPort.Migrations
 
                     b.Property<int>("Capacity")
                         .HasColumnType("int")
-                        .HasColumnName("PlaneCapacity");
+                        .HasColumnName("PlaneCapacity")
+                        .HasAnnotation("Range", new[] { 10, 1000 });
 
                     b.Property<DateTime>("ManufactureDate")
                         .HasColumnType("datetime");
@@ -107,22 +183,6 @@ namespace GestionAirPort.Migrations
                     b.HasKey("PlaneId");
 
                     b.ToTable("MyPlanes", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            PlaneId = 1,
-                            Capacity = 150,
-                            ManufactureDate = new DateTime(2015, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlaneType = "Commercial"
-                        },
-                        new
-                        {
-                            PlaneId = 2,
-                            Capacity = 20,
-                            ManufactureDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlaneType = "Private"
-                        });
                 });
 
             modelBuilder.Entity("GestionAirPort.Models.Ticket", b =>
@@ -133,15 +193,25 @@ namespace GestionAirPort.Migrations
                     b.Property<string>("PassengerFk")
                         .HasColumnType("nvarchar(7)");
 
-                    b.Property<double>("Prix")
-                        .HasColumnType("float");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<decimal>("Prix")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Siege")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("TicketId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("VIP")
                         .HasColumnType("bit");
@@ -185,6 +255,15 @@ namespace GestionAirPort.Migrations
                     b.ToTable("Travellers", (string)null);
                 });
 
+            modelBuilder.Entity("GestionAirPort.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("GestionAirPort.Models.Passenger", "Passenger")
+                        .WithOne()
+                        .HasForeignKey("GestionAirPort.Models.ApplicationUser", "PassportNumber");
+
+                    b.Navigation("Passenger");
+                });
+
             modelBuilder.Entity("GestionAirPort.Models.Flight", b =>
                 {
                     b.HasOne("GestionAirPort.Models.Plane", "Plane")
@@ -205,12 +284,13 @@ namespace GestionAirPort.Migrations
 
                             b1.Property<string>("FirstName")
                                 .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)");
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
 
                             b1.Property<string>("LastName")
                                 .IsRequired()
-                                .HasColumnType("nvarchar(max)");
+                                .HasMaxLength(50)
+                                .HasColumnType("nvarchar(50)");
 
                             b1.HasKey("PassengerPassportNumber");
 

@@ -2,91 +2,79 @@
 
 @{
     ViewData["Title"] = "Supprimer le Ticket";
-    var currentDateTime = "2025-05-22 09:25:06";
-    var currentUser = "Imen-Ht07";
 }
 
 <div class="container-fluid">
-    <!-- User Info Bar -->
-    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <i class="fas fa-user-circle me-2 text-primary"></i>
-                <span class="fw-bold text-primary">@currentUser</span>
-            </div>
-            <div>
-                <i class="fas fa-clock me-2 text-info"></i>
-                <span class="text-info">@currentDateTime UTC</span>
-            </div>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>@ViewData["Title"]</h1>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header bg-danger text-white py-3">
-            <div class="d-flex justify-content-between align-items-center">
-                <h3 class="card-title mb-0">
-                    <i class="fas fa-trash-alt me-2"></i>Supprimer le Ticket #@Model.TicketId
-                </h3>
-                <span class="badge bg-light text-danger">
-                    <i class="fas fa-exclamation-triangle me-2"></i>Action irréversible
-                </span>
-            </div>
-        </div>
-
-        <div class="card-body py-4">
-            <div class="alert alert-warning">
-                <i class="fas fa-exclamation-triangle me-2"></i>
-                Êtes-vous sûr de vouloir supprimer ce ticket ? Cette action est irréversible.
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-danger">
+                <h4><i class="fas fa-exclamation-triangle"></i> Confirmation de suppression</h4>
+                <p>Êtes-vous sûr de vouloir supprimer ce ticket ?</p>
             </div>
 
-            <div class="row g-4">
-                <!-- Informations du Vol -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg-white">
-                            <h5 class="mb-0 text-danger">
-                                <i class="fas fa-plane me-2"></i>Informations du Vol
-                            </h5>
-                        </div>
-                        <div class="card-body text-dark">
-                            <dl class="row mb-0">
-                                <dt class="col-sm-4 text-muted">Vol</dt>
-                                <dd class="col-sm-8">
-                                    <span class="badge bg-primary">#@Model.Flight.FlightId</span>
-                                </dd>
-
-                                <dt class="col-sm-4 text-muted">Départ</dt>
-                                <dd class="col-sm-8">
-                                    <i class="fas fa-plane-departure me-2"></i>
-                                    @Model.Flight.Departure
-                                </dd>
-
-                                <dt class="col-sm-4 text-muted">Destination</dt>
-                                <dd class="col-sm-8">
-                                    <i class="fas fa-plane-arrival me-2"></i>
-                                    @Model.Flight.Destination
-                                </dd>
-
-                                <dt class="col-sm-4 text-muted">Date</dt>
-                                <dd class="col-sm-8">
-                                    <i class="fas fa-calendar me-2"></i>
-                                    @Model.Flight.FlightDate.ToString("dd/MM/yyyy HH:mm")
-                                </dd>
-
-                                <dt class="col-sm-4 text-muted">Siège</dt>
-                                <dd class="col-sm-8">
-                                    <span class="badge bg-info">
-                                        <i class="fas fa-chair me-2"></i>@Model.Siege
-                                    </span>
-                                </dd>
-                            </dl>
-                        </div>
-                    </div>
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5>Détails du ticket</h5>
                 </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TicketInfo)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.TicketInfo)</dd>
 
-                <!-- Informations du Passager -->
-                <div class="col-md-6">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg-white">
-                            <h5 class="mb-0 text-danger
-                                
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Prix)</dt>
+                        <dd class="col-sm-9">@Html.DisplayFor(model => model.FormattedPrice)</dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Passenger)</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.Passenger != null)
+                            {
+                                @($"{Model.Passenger.FullName.LastName} {Model.Passenger.FullName.FirstName}")
+                            }
+                        </dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Flight)</dt>
+                        <dd class="col-sm-9">
+                            @if (Model.Flight != null)
+                            {
+                                @($"Vol {Model.Flight.FlightId} - {Model.Flight.Departure} → {Model.Flight.Destination}")
+                                <br />
+                                <small class="text-muted">Date: @Model.Flight.FlightDate.ToString("dd/MM/yyyy HH:mm")</small>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Status)</dt>
+                        <dd class="col-sm-9">
+                            <span class="badge @(Model.Status == TicketStatus.Active ? "bg-success" :
+                                              Model.Status == TicketStatus.Cancelled ? "bg-danger" : "bg-secondary")">
+                                @Html.DisplayFor(model => model.Status)
+                            </span>
+                        </dd>
+
+                        <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CreatedAt)</dt>
+                        <dd class="col-sm-9">@Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")</dd>
+
+                        @if (Model.UpdatedAt.HasValue)
+                        {
+                            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.UpdatedAt)</dt>
+                            <dd class="col-sm-9">@Model.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            <form asp-action="Delete" class="mt-3">
+                <input type="hidden" asp-for="TicketId" />
+                <button type="submit" class="btn btn-danger">
+                    <i class="fas fa-trash"></i> Confirmer la suppression
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Retour
+                </a>
+            </form>
+        </div>
+    </div>
+</div>

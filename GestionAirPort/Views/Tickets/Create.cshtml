@@ -1,169 +1,138 @@
 ﻿@model GestionAirPort.Models.Ticket
 
 @{
-    ViewData["Title"] = "Nouveau Ticket";
-    var currentUser = "Imen-Ht07";
+    ViewData["Title"] = "Créer un Ticket";
 }
 
 <div class="container-fluid">
-    <!-- User Info Bar -->
-    <div class="user-info-bar mb-4 p-3 bg-white shadow-sm rounded">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <i class="fas fa-user-circle me-2 text-primary"></i>
-                <span class="fw-bold text-primary">@currentUser</span>
-            </div>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>@ViewData["Title"]</h1>
     </div>
 
-    <div class="card shadow">
-        <div class="card-header bg-info text-white py-3">
-            <h3 class="card-title mb-0">
-                <i class="fas fa-ticket-alt me-2"></i>Nouveau Ticket
-            </h3>
-        </div>
-
-        <form asp-action="Create">
-            <div class="card-body py-4 text-dark">
+    <div class="card">
+        <div class="card-body text-dark">
+            <form asp-action="Create" id="createTicketForm">
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-                <div class="row g-4">
-                    <!-- Informations Vol et Passager -->
+                <div class="row">
                     <div class="col-md-6">
-                        <div class="card h-100 shadow-sm hover-card">
-                            <div class="card-header bg-white">
-                                <h5 class="mb-0 text-info">
-                                    <i class="fas fa-plane me-2"></i>Vol et Passager
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label asp-for="FlightFk" class="form-label">Vol</label>
-                                    <select asp-for="FlightFk" asp-items="ViewBag.FlightFk" class="form-select">
-                                        <option value="">-- Sélectionner un vol --</option>
-                                    </select>
-                                    <span asp-validation-for="FlightFk" class="text-danger"></span>
-                                </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="FlightFk" class="control-label"></label>
+                            <select asp-for="FlightFk" class="form-select" asp-items="ViewBag.FlightFk">
+                                <option value="">-- Sélectionner un vol --</option>
+                            </select>
+                            <span asp-validation-for="FlightFk" class="text-danger"></span>
+                        </div>
 
-                                <div class="mb-3">
-                                    <label asp-for="PassengerFk" class="form-label">Passager</label>
-                                    <select asp-for="PassengerFk" asp-items="ViewBag.PassengerFk" class="form-select">
-                                        <option value="">-- Sélectionner un passager --</option>
-                                    </select>
-                                    <span asp-validation-for="PassengerFk" class="text-danger"></span>
-                                </div>
-                            </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="PassengerFk" class="control-label"></label>
+                            <select asp-for="PassengerFk" class="form-select" asp-items="ViewBag.PassengerFk">
+                                <option value="">-- Sélectionner un passager --</option>
+                            </select>
+                            <span asp-validation-for="PassengerFk" class="text-danger"></span>
                         </div>
                     </div>
 
-                    <!-- Détails du Ticket -->
                     <div class="col-md-6">
-                        <div class="card h-100 shadow-sm hover-card">
-                            <div class="card-header bg-white">
-                                <h5 class="mb-0 text-info">
-                                    <i class="fas fa-info-circle me-2"></i>Détails du Ticket
-                                </h5>
+                        <div class="form-group mb-3">
+                            <label asp-for="Prix" class="control-label"></label>
+                            <div class="input-group">
+                                <span class="input-group-text">€</span>
+                                <input asp-for="Prix" class="form-control" type="number" step="0.01" min="0" max="10000" />
                             </div>
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label asp-for="Prix" class="form-label"></label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">€</span>
-                                        <input asp-for="Prix" class="form-control" />
-                                    </div>
-                                    <span asp-validation-for="Prix" class="text-danger"></span>
-                                </div>
+                            <span asp-validation-for="Prix" class="text-danger"></span>
+                        </div>
 
-                                <div class="mb-3">
-                                    <label asp-for="Siege" class="form-label"></label>
-                                    <input asp-for="Siege" class="form-control" placeholder="ex: A12" />
-                                    <span asp-validation-for="Siege" class="text-danger"></span>
-                                </div>
+                        <div class="form-group mb-3">
+                            <label asp-for="Siege" class="control-label"></label>
+                            <input asp-for="Siege" class="form-control" />
+                            <span asp-validation-for="Siege" class="text-danger"></span>
+                            <div id="seatAvailability" class="mt-1"></div>
+                        </div>
 
-                                <div class="form-check form-switch">
-                                    <input asp-for="VIP" class="form-check-input" />
-                                    <label asp-for="VIP" class="form-check-label"></label>
-                                </div>
-                            </div>
+                        <div class="form-check mb-3">
+                            <input asp-for="VIP" class="form-check-input" type="checkbox" />
+                            <label asp-for="VIP" class="form-check-label"></label>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="card-footer bg-white py-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                        <a asp-action="Index" class="btn btn-outline-secondary">
-                            <i class="fas fa-arrow-left me-2"></i>Retour
-                        </a>
-                        <button type="submit" class="btn btn-success">
-                            <i class="fas fa-save me-2"></i>Enregistrer
-                        </button>
-                    </div>
-                    <small class="text-muted">
-                        <i class="fas fa-info-circle me-2"></i>
-                        Tous les champs marqués * sont obligatoires
-                    </small>
+                <div id="flightDetails" class="alert alert-info d-none mb-3">
+                    <!-- Les détails du vol seront affichés ici -->
                 </div>
-            </div>
-        </form>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Créer
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-<style>
-    .user-info-bar {
-        border-left: 4px solid #17a2b8;
-        background: linear-gradient(to right, rgba(23,162,184,0.1), transparent);
-    }
-
-    .hover-card {
-        transition: all 0.3s ease;
-    }
-
-        .hover-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important;
-        }
-
-    .form-label {
-        font-weight: 500;
-        color: #495057;
-    }
-
-    .form-control, .form-select {
-        border-radius: 0.5rem;
-    }
-
-        .form-control:focus, .form-select:focus {
-            border-color: #17a2b8;
-            box-shadow: 0 0 0 0.2rem rgba(23,162,184,0.25);
-        }
-
-    .input-group-text {
-        background-color: #17a2b8;
-        color: white;
-        border: none;
-    }
-
-    .form-check-input:checked {
-        background-color: #17a2b8;
-        border-color: #17a2b8;
-    }
-
-    .btn {
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        transition: all 0.2s;
-    }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-</style>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        $(document).ready(function () {
+            // Fonction pour mettre à jour les détails du vol
+            function updateFlightDetails() {
+                var flightId = $('#FlightFk').val();
+                if (flightId) {
+                    $.get('/Tickets/GetFlightDetails/' + flightId, function (data) {
+                        $('#flightDetails').removeClass('d-none').html(`
+                            <h5>Détails du Vol</h5>
+                            <p>
+                                <strong>Départ:</strong> ${data.departure}<br>
+                                <strong>Destination:</strong> ${data.destination}<br>
+                                <strong>Date:</strong> ${data.flightDate}<br>
+                                <strong>Places disponibles:</strong> ${data.availableSeats}/${data.planeCapacity}
+                            </p>
+                        `);
+                    });
+                } else {
+                    $('#flightDetails').addClass('d-none');
+                }
+            }
+
+            // Fonction pour vérifier la disponibilité du siège
+            function checkSeatAvailability() {
+                var flightId = $('#FlightFk').val();
+                var seat = $('#Siege').val();
+                if (flightId && seat) {
+                    $.get('/Tickets/CheckSeatAvailability', { flightId: flightId, seat: seat }, function (data) {
+                        var badge = data.isAvailable ?
+                            '<span class="badge bg-success">Siège disponible</span>' :
+                            '<span class="badge bg-danger">Siège déjà occupé</span>';
+                        $('#seatAvailability').html(badge);
+                    });
+                }
+            }
+
+            // Gestionnaires d'événements
+            $('#FlightFk').change(updateFlightDetails);
+            $('#Siege').change(checkSeatAvailability);
+            $('#FlightFk').change(function() {
+                if ($('#Siege').val()) {
+                    checkSeatAvailability();
+                }
+            });
+
+            // Calcul du prix VIP
+            $('#VIP').change(function() {
+                var basePrice = parseFloat($('#Prix').val()) || 0;
+                if (this.checked) {
+                    $('#Prix').val((basePrice * 1.5).toFixed(2));
+                } else {
+                    $('#Prix').val((basePrice / 1.5).toFixed(2));
+                }
+            });
+        });
+    </script>
 }

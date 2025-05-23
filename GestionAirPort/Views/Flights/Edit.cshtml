@@ -11,7 +11,7 @@
                 <i class="fas fa-edit"></i> Modifier le Vol #@Model.FlightId
             </h3>
         </div>
-        <div class="card-body">
+        <div class="card-body text-dark">
             <form asp-action="Edit" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
                 <input type="hidden" asp-for="FlightId" />
