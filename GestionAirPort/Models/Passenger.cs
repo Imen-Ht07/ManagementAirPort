@@ -22,11 +22,10 @@ namespace GestionAirPort.Models
         [Required(ErrorMessage = "La date de naissance est obligatoire")]
         [Display(Name = "Date de Naissance")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
         [Required(ErrorMessage = "Le numéro de téléphone est obligatoire")]
-        [RegularExpression(@"^\d{8}$", ErrorMessage = "Le numéro de téléphone doit contenir exactement 8 chiffres")]
+        [RegularExpression(@"^\+?[0-9\s\-()]{7,20}$", ErrorMessage = "Numéro de téléphone invalide")]
         [Display(Name = "Téléphone")]
         public string TelNumber { get; set; }
 

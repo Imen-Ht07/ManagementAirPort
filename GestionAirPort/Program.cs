@@ -7,11 +7,11 @@ using GestionAirPort.Constants;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Configuration de la connexion à SQL Server
+// Configuration de la connexion à SQL Server
 builder.Services.AddDbContext<AirportContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// ✅ Configuration Identity avec EntityFramework
+//  Configuration Identity avec EntityFramework
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit = true;
@@ -22,7 +22,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.User.RequireUniqueEmail = true;
     options.SignIn.RequireConfirmedAccount = false;
 })
-.AddEntityFrameworkStores<AirportContext>() // Ajout important !
+.AddEntityFrameworkStores<AirportContext>() 
 .AddDefaultTokenProviders();
 
 // ✅ Configuration des cookies d'authentification
@@ -87,11 +87,11 @@ app.Use(async (context, next) =>
 
 app.UseRouting();
 
-// ✅ Configuration Authentication/Authorization
+// Configuration Authentication/Authorization
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ✅ Initialisation des rôles et admin
+// Initialisation des rôles et admin
 using (var scope = app.Services.CreateScope())
 {
     try
@@ -137,7 +137,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-// ✅ Configuration des routes
+//  Configuration des routes
 app.MapControllerRoute(
     name: "planes",
     pattern: "Planes/{action=Index}/{id?}",

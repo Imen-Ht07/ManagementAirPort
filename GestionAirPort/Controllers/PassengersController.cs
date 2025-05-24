@@ -91,11 +91,6 @@ namespace GestionAirPort.Controllers
                         return View(passenger);
                     }
 
-                    if (passenger.Age < 18)
-                    {
-                        ModelState.AddModelError("BirthDate", "Le passager doit être majeur");
-                        return View(passenger);
-                    }
 
                     _context.Add(passenger);
                     await _context.SaveChangesAsync();
@@ -156,12 +151,7 @@ namespace GestionAirPort.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    if (passenger.Age < 18)
-                    {
-                        ModelState.AddModelError("BirthDate", "Le passager doit être majeur");
-                        return View(passenger);
-                    }
-
+                   
                     var existingPassenger = await _context.Passengers
                         .Include(p => p.Tickets)
                         .FirstOrDefaultAsync(p => p.PassportNumber == id);

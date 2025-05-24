@@ -19,7 +19,7 @@ namespace GestionAirPort.Models
         [Display(Name = "Nom")]
         public string LastName { get; set; }
 
-        // Propriété calculée pour le nom complet
+        // Propriété pour le nom complet
         public string FullNameValue => $"{LastName} {FirstName}";
     }
 }

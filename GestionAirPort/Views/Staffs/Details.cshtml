@@ -1,50 +1,171 @@
-﻿@if (Model.Tickets != null && Model.Tickets.Any())
-{
-    <div class="card mb-3">
-        <div class="card-header bg-light">
+﻿@model GestionAirPort.Models.Staff
+
+@{
+    ViewData["Title"] = "Détails du Personnel";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>@ViewData["Title"]</h1>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-header bg-primary text-white">
             <h5 class="mb-0">
-                <i class="fas fa-ticket-alt"></i> Tickets Associés
+                <i class="fas fa-user-tie"></i> Informations du Personnel
             </h5>
         </div>
-        <div class="card-body">
-            <div class="list-group">
-                @foreach (var ticket in Model.Tickets)
-                {
-                    <div class="list-group-item">
-                        @if (ticket.Flight != null)
-                        {
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">
-                                    <i class="fas fa-plane me-2"></i>
-                                    Ticket #@ticket.Id
-                                </h6>
-                                <small class="text-muted">
-                                    Prix: @ticket.Price.ToString("C2")
-                                </small>
-                            </div>
-                            <p class="mb-1">
-                                <small>
-                                    <i class="fas fa-calendar me-2"></i>
-                                    @ticket.Flight.Date.ToString("dd/MM/yyyy HH:mm")
-                                </small>
-                            </p>
-                            <p class="mb-0">
-                                <small>
-                                    <i class="fas fa-map-marker-alt me-2"></i>
-                                    De: @ticket.Flight.Departure - Vers: @ticket.Flight.Destination
-                                </small>
-                            </p>
-                        }
-                        else
-                        {
-                            <p class="mb-0 text-muted">
-                                <i class="fas fa-exclamation-circle me-2"></i>
-                                Informations de vol non disponibles
-                            </p>
-                        }
-                    </div>
-                }
+        <div class="card-body text-dark">
+            <div class="row">
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Fonction</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-info">@Model.Function</span>
+                        </dd>
+
+                        <dt class="col-sm-4">N° Passeport</dt>
+                        <dd class="col-sm-8">@Model.PassportNumber</dd>
+
+                        <dt class="col-sm-4">Nom</dt>
+                        <dd class="col-sm-8">@Model.FullName.LastName</dd>
+
+                        <dt class="col-sm-4">Prénom</dt>
+                        <dd class="col-sm-8">@Model.FullName.FirstName</dd>
+
+                        <dt class="col-sm-4">Date de Naissance</dt>
+                        <dd class="col-sm-8">@Model.BirthDate.ToString("dd/MM/yyyy")</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <dl class="row">
+                        <dt class="col-sm-4">Date d'emploi</dt>
+                        <dd class="col-sm-8">@Model.EmployementDate.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4">Salaire</dt>
+                        <dd class="col-sm-8">@Model.Salary.ToString("N2")</dd>
+
+                        <dt class="col-sm-4">Téléphone</dt>
+                        <dd class="col-sm-8">
+                            <i class="fas fa-phone me-2"></i>
+                            @Model.TelNumber
+                        </dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">
+                            <i class="fas fa-envelope me-2"></i>
+                            @Model.EmailAddress
+                        </dd>
+
+                        <dt class="col-sm-4">Âge</dt>
+                        <dd class="col-sm-8">@Model.Age ans</dd>
+                    </dl>
+                </div>
             </div>
         </div>
     </div>
+
+    @if (Model.Tickets != null && Model.Tickets.Any())
+    {
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-ticket-alt"></i> Tickets Gérés (@Model.Tickets.Count)
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group">
+                    @foreach (var ticket in Model.Tickets)
+                    {
+                        <div class="list-group-item">
+                            @if (ticket.Flight != null)
+                            {
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">
+                                        <i class="fas fa-plane me-2"></i>
+                                        Ticket #@ticket.TicketId
+                                        @if (ticket.VIP)
+                                        {
+                                            <span class="badge bg-warning ms-2">VIP</span>
+                                        }
+                                    </h6>
+                                    <small class="text-muted">
+                                        Prix: @ticket.Prix.ToString("C2")
+                                    </small>
+                                </div>
+                                <p class="mb-1">
+                                    <small>
+                                        <i class="fas fa-calendar me-2"></i>
+                                        @ticket.Flight.FlightDate.ToString("dd/MM/yyyy HH:mm")
+                                    </small>
+                                    <small class="ms-3">
+                                        <i class="fas fa-chair me-2"></i>
+                                        Siège: @ticket.Siege
+                                    </small>
+                                </p>
+                                <p class="mb-0">
+                                    <small>
+                                        <i class="fas fa-map-marker-alt me-2"></i>
+                                        De: @ticket.Flight.Departure - Vers: @ticket.Flight.Destination
+                                    </small>
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="mb-0 text-muted">
+                                    <i class="fas fa-exclamation-circle me-2"></i>
+                                    Informations de vol non disponibles
+                                </p>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            <i class="fas fa-info-circle me-2"></i>
+            Ce membre du personnel n'a pas encore géré de tickets.
+        </div>
+    }
+
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model.PassportNumber" class="btn btn-warning">
+            <i class="fas fa-edit"></i> Modifier
+        </a>
+        <a asp-action="Delete" asp-route-id="@Model.PassportNumber" class="btn btn-danger">
+            <i class="fas fa-trash"></i> Supprimer
+        </a>
+        <a asp-action="Index" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Retour
+        </a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Auto-hide alerts after 5 seconds
+            setTimeout(function () {
+                $('.alert').fadeOut('slow');
+            }, 5000);
+        });
+    </script>
 }

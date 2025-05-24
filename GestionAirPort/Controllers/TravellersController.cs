@@ -92,12 +92,6 @@ namespace GestionAirPort.Controllers
                         return View(traveller);
                     }
 
-                    if (traveller.Age < 18)
-                    {
-                        ModelState.AddModelError("BirthDate", "Le voyageur doit être majeur");
-                        return View(traveller);
-                    }
-
                     _context.Add(traveller);
                     await _context.SaveChangesAsync();
                     TempData["Success"] = "Voyageur créé avec succès!";
@@ -167,11 +161,7 @@ namespace GestionAirPort.Controllers
                         return RedirectToAction(nameof(Index));
                     }
 
-                    if (traveller.Age < 18)
-                    {
-                        ModelState.AddModelError("BirthDate", "Le voyageur doit être majeur");
-                        return View(traveller);
-                    }
+                   
 
                     // Mise à jour des propriétés
                     existingTraveller.FullName = traveller.FullName;

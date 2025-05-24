@@ -86,12 +86,15 @@ namespace GestionAirPort.Controllers
         {
             try
             {
+                ViewBag.CurrentUser = "Imen-Ht07";
+                ViewBag.CurrentDateTime = "2025-05-23 11:05:27";
+
                 PrepareCreateViewData();
+
                 return View(new Ticket
                 {
                     VIP = false,
-                    Prix = 0,
-    
+                    Prix = 0
                 });
             }
             catch (Exception ex)
@@ -445,6 +448,7 @@ namespace GestionAirPort.Controllers
         {
             try
             {
+                // Liste des vols disponibles
                 var flights = _context.Flights
                     .Include(f => f.Plane)
                     .Include(f => f.Tickets)
@@ -453,23 +457,37 @@ namespace GestionAirPort.Controllers
                         f.Tickets.Count(t => t.Status != TicketStatus.Cancelled) < f.Plane.Capacity)
                     .OrderBy(f => f.FlightDate)
                     .AsNoTracking()
+                    .ToList()
                     .Select(f => new SelectListItem
                     {
                         Value = f.FlightId.ToString(),
-                        Text = $"Vol {f.FlightId} - {f.Departure} → {f.Destination} - {f.FlightDate:dd/MM/yyyy HH:mm} ({f.Plane.Capacity - f.Tickets.Count(t => t.Status != TicketStatus.Cancelled)} places)"
-                    })
-                    .ToList();
+                        Text = $"Vol {f.FlightId} - {f.Departure} → {f.Destination} - {f.FlightDate:dd/MM/yyyy HH:mm} ({f.Plane.Capacity - f.Tickets.Count} places)"
+                    });
 
-                var passengers = _context.Passengers
-                    .Include(p => p.FullName)
-                    .OrderBy(p => p.FullName.LastName)
+                // Liste des Staffs
+                var staffs = _context.Staffs
+                    .Include(s => s.FullName)
                     .AsNoTracking()
-                    .Select(p => new SelectListItem
+                    .ToList()
+                    .Select(s => new SelectListItem
                     {
-                        Value = p.PassportNumber,
-                        Text = $"{p.FullName.LastName} {p.FullName.FirstName} ({p.PassportNumber})"
-                    })
-                    .ToList();
+                        Value = s.PassportNumber,
+                        Text = $"{s.FullName.LastName} {s.FullName.FirstName} ({s.PassportNumber}) - Staff"
+                    });
+
+                // Liste des Travellers
+                var travellers = _context.Travellers
+                    .Include(t => t.FullName)
+                    .AsNoTracking()
+                    .ToList()
+                    .Select(t => new SelectListItem
+                    {
+                        Value = t.PassportNumber,
+                        Text = $"{t.FullName.LastName} {t.FullName.FirstName} ({t.PassportNumber}) - Voyageur"
+                    });
+
+                // Combiner les listes de passagers et trier
+                var passengers = staffs.Concat(travellers).OrderBy(p => p.Text);
 
                 ViewBag.FlightFk = flights;
                 ViewBag.PassengerFk = passengers;
@@ -479,7 +497,6 @@ namespace GestionAirPort.Controllers
                 throw new Exception($"Erreur lors de la préparation des données: {ex.Message}");
             }
         }
-
         private void PrepareEditViewData(Ticket ticket)
         {
             PrepareCreateViewData();

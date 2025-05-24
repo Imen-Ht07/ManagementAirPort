@@ -107,7 +107,6 @@
                                         <input asp-for="BirthDate" class="form-control" type="date" />
                                     </div>
                                     <span asp-validation-for="BirthDate" class="text-danger"></span>
-                                    <small class="text-muted">Le voyageur doit être majeur (18 ans ou plus)</small>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +128,8 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-phone"></i>
                                         </span>
-                                        <input asp-for="TelNumber" class="form-control" placeholder="12345678" />
+                                        <input asp-for="TelNumber" class="form-control" placeholder="+216 12 345 678" />
+
                                     </div>
                                     <span asp-validation-for="TelNumber" class="text-danger"></span>
                                 </div>
@@ -233,11 +233,13 @@
     }
 
     <script>
-        $(document).ready(function() {
-            // Date de naissance maximale (18 ans minimum)
-            var today = new Date();
-            var maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
-            $('#BirthDate').attr('max', maxDate.toISOString().split('T')[0]);
+        $(document).ready(function () {
+
+            // Ajout de la méthode personnalisée pour regex
+            $.validator.addMethod("regex", function (value, element, regexp) {
+                var re = new RegExp(regexp);
+                return this.optional(element) || re.test(value);
+            }, "Format invalide");
 
             // Validation personnalisée
             $("#createTravellerForm").validate({
@@ -249,9 +251,7 @@
                     },
                     "TelNumber": {
                         required: true,
-                        minlength: 8,
-                        maxlength: 8,
-                        digits: true
+                        regex: /^\+?[0-9\s\-()]{7,20}$/
                     },
                     "EmailAddress": {
                         required: true,
@@ -270,9 +270,7 @@
                     },
                     "TelNumber": {
                         required: "Le numéro de téléphone est obligatoire",
-                        minlength: "Le numéro doit contenir 8 chiffres",
-                        maxlength: "Le numéro doit contenir 8 chiffres",
-                        digits: "Uniquement des chiffres"
+                        regex: "Entrez un numéro de téléphone valide avec indicatif (+216...), espaces ou tirets autorisés"
                     },
                     "EmailAddress": {
                         required: "L'adresse email est obligatoire",
@@ -286,4 +284,5 @@
             });
         });
     </script>
+
 }

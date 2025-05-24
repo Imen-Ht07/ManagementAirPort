@@ -11,7 +11,6 @@ namespace GestionAirPort.Models
         [Required(ErrorMessage = "La date d'emploi est obligatoire")]
         [Display(Name = "Date d'Embauche")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EmployementDate { get; set; }
 
         [Required(ErrorMessage = "Le salaire est obligatoire")]

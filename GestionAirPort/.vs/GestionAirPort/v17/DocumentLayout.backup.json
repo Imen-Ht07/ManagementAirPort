@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\planes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\planes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\controllers\\planescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:controllers\\planescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\passenger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\passenger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\fullname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\fullname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\travellers\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\travellers\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\tickets\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\tickets\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\flights\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\flights\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\tickets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\tickets\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -11,10 +51,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\tickets\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\tickets\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\wwwroot\\lib\\jquery\\dist\\jquery.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -31,14 +67,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\planes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\planes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\planes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\planes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\flights\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:views\\flights\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\views\\flights\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -101,20 +129,12 @@
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:gestionairport.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\controllers\\planescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:controllers\\planescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\controllers\\flightscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:controllers\\flightscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\plane.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\data\\airportcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -133,20 +153,8 @@
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\staff.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\passenger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\passenger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\fullname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\fullname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\models\\flight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:models\\flight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{78E5788A-B7BF-484E-B786-94162A3627B6}|GestionAirPort.csproj|c:\\users\\bessa\\source\\repos\\gestionairport\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -160,7 +168,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 197,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 20,
           "Children": [
             {
               "$type": "Bookmark",
@@ -191,465 +199,6 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tickets\\Index.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Index.cshtml",
-              "RelativeToolTip": "Views\\Tickets\\Index.cshtml",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAG4AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-22T16:16:46.593Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Tickets\\Create.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Create.cshtml",
-              "RelativeToolTip": "Views\\Tickets\\Create.cshtml",
-              "ViewState": "AgIAAAgBAAAAAAAAAAAswD0BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-22T11:47:09.882Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "jquery.js",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "RelativeToolTip": "wwwroot\\lib\\jquery\\dist\\jquery.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-20T15:42:26.786Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "jquery.validate.js",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-              "RelativeToolTip": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-20T15:38:31.743Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "jquery.validate.unobtrusive.js",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-              "RelativeToolTip": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-05-20T15:37:42.717Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Planes\\Create.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Create.cshtml",
-              "RelativeToolTip": "Views\\Planes\\Create.cshtml",
-              "ViewState": "AgIAACUAAAAAAAAAAAAAABYAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T15:03:52.415Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Planes\\Index.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Index.cshtml",
-              "RelativeToolTip": "Views\\Planes\\Index.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T15:02:40.206Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Flights\\Index.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Index.cshtml",
-              "RelativeToolTip": "Views\\Flights\\Index.cshtml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD0AAAAdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T14:17:20.12Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Flights\\Create.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Create.cshtml",
-              "RelativeToolTip": "Views\\Flights\\Create.cshtml",
-              "ViewState": "AgIAADUAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T14:17:17.93Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PassengersController.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PassengersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PassengersController.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PassengersController.cs",
-              "RelativeToolTip": "Controllers\\PassengersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T14:16:10.465Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "airport-background.jpg - Bitmap [3550x4734, 24 bits, JPG]",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\images\\airport-background.jpg",
-              "RelativeDocumentMoniker": "wwwroot\\images\\airport-background.jpg",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\images\\airport-background.jpg - Bitmap [3550x4734, 24 bits, JPG]",
-              "RelativeToolTip": "wwwroot\\images\\airport-background.jpg - Bitmap [3550x4734, 24 bits, JPG]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2025-05-20T14:07:59.802Z",
-              "EditorCaption": " - Bitmap [3550x4734, 24 bits, JPG]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAowCIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-05-20T14:03:15.708Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Privacy.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Privacy.cshtml",
-              "RelativeToolTip": "Views\\Home\\Privacy.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:51:58.704Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:51:55.221Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Error.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\Error.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\Error.cshtml",
-              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:47:24.005Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:47:15.225Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAACwAAAAAAAAAAAAswDwAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:46:58.463Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:46:07.605Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-20T13:46:04.864Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "TicketsController.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TicketsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TicketsController.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TicketsController.cs",
-              "RelativeToolTip": "Controllers\\TicketsController.cs",
-              "ViewState": "AgIAAN8BAAAAAAAAAAAAAN8BAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T13:41:06.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "StaffsController.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\StaffsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\StaffsController.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\StaffsController.cs",
-              "RelativeToolTip": "Controllers\\StaffsController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T13:40:21.17Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "TravellersController.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TravellersController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TravellersController.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TravellersController.cs",
-              "RelativeToolTip": "Controllers\\TravellersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T13:39:30.53Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "GestionAirPort.csproj",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\GestionAirPort.csproj",
-              "RelativeDocumentMoniker": "GestionAirPort.csproj",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\GestionAirPort.csproj",
-              "RelativeToolTip": "GestionAirPort.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-20T13:37:20.512Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "PlanesController.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PlanesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\PlanesController.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PlanesController.cs",
-              "RelativeToolTip": "Controllers\\PlanesController.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAxwCQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T13:20:52.527Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "FlightsController.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\FlightsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\FlightsController.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\FlightsController.cs",
-              "RelativeToolTip": "Controllers\\FlightsController.cs",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-20T13:19:46.289Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-19T17:40:53.153Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "about_EntityFrameworkCore.help.txt",
-              "DocumentMoniker": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt",
-              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt",
-              "ToolTip": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt [Lecture seule]",
-              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt [Lecture seule]",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-05-19T17:30:57.038Z",
-              "EditorCaption": " [Lecture seule]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PACKAGE.md",
-              "DocumentMoniker": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md",
-              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md",
-              "ToolTip": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md [Lecture seule]",
-              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md [Lecture seule]",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-05-19T17:30:55.788Z",
-              "EditorCaption": " [Lecture seule]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Plane.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Plane.cs",
-              "RelativeDocumentMoniker": "Models\\Plane.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Plane.cs",
-              "RelativeToolTip": "Models\\Plane.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:12:20.603Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "AirportContext.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\data\\AirportContext.cs",
-              "RelativeDocumentMoniker": "data\\AirportContext.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\data\\AirportContext.cs",
-              "RelativeToolTip": "data\\AirportContext.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAIwBkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:11:43.286Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "Traveller.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Traveller.cs",
-              "RelativeDocumentMoniker": "Models\\Traveller.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Traveller.cs",
-              "RelativeToolTip": "Models\\Traveller.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:01:10.783Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "Ticket.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Ticket.cs",
-              "RelativeDocumentMoniker": "Models\\Ticket.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Ticket.cs",
-              "RelativeToolTip": "Models\\Ticket.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAuwEUAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:01:10.301Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "Staff.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Staff.cs",
-              "RelativeDocumentMoniker": "Models\\Staff.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Staff.cs",
-              "RelativeToolTip": "Models\\Staff.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:01:08.822Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "Passenger.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Passenger.cs",
-              "RelativeDocumentMoniker": "Models\\Passenger.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Passenger.cs",
-              "RelativeToolTip": "Models\\Passenger.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAqwDoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:01:07.918Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "FullName.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\FullName.cs",
-              "RelativeDocumentMoniker": "Models\\FullName.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\FullName.cs",
-              "RelativeToolTip": "Models\\FullName.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:01:05.165Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Flight.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Flight.cs",
-              "RelativeDocumentMoniker": "Models\\Flight.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Flight.cs",
-              "RelativeToolTip": "Models\\Flight.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAwAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:00:59.848Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAhwGIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-19T17:00:19.279Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-19T16:59:52.17Z"
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{007a3a6b-b5b2-454d-a2bd-cf929f989be2}"
             },
@@ -668,6 +217,496 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "Models\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\ApplicationUser.cs",
+              "RelativeToolTip": "Models\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T12:20:45.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Travellers\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Travellers\\Create.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Travellers\\Create.cshtml",
+              "RelativeToolTip": "Views\\Travellers\\Create.cshtml",
+              "ViewState": "AgIAABkAAAAAAAAAAAAuwG8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-23T12:09:48.862Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Tickets\\Index.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Index.cshtml",
+              "RelativeToolTip": "Views\\Tickets\\Index.cshtml",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAAAG4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T16:16:46.593Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Tickets\\Create.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Tickets\\Create.cshtml",
+              "RelativeToolTip": "Views\\Tickets\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-22T11:47:09.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "jquery.js",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "RelativeToolTip": "wwwroot\\lib\\jquery\\dist\\jquery.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-20T15:42:26.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "jquery.validate.js",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+              "RelativeToolTip": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-20T15:38:31.743Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "jquery.validate.unobtrusive.js",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+              "RelativeDocumentMoniker": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+              "RelativeToolTip": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-05-20T15:37:42.717Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Planes\\Create.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Create.cshtml",
+              "RelativeToolTip": "Views\\Planes\\Create.cshtml",
+              "ViewState": "AgIAACUAAAAAAAAAAAAAABYAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T15:03:52.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Planes\\Index.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Planes\\Index.cshtml*",
+              "RelativeToolTip": "Views\\Planes\\Index.cshtml*",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAuwIAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T15:02:40.206Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Flights\\Index.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Index.cshtml",
+              "RelativeToolTip": "Views\\Flights\\Index.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAD0AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T14:17:20.12Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Flights\\Create.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Flights\\Create.cshtml",
+              "RelativeToolTip": "Views\\Flights\\Create.cshtml",
+              "ViewState": "AgIAADUAAAAAAAAAAAAAAEoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T14:17:17.93Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PassengersController.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PassengersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PassengersController.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PassengersController.cs",
+              "RelativeToolTip": "Controllers\\PassengersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T14:16:10.465Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "airport-background.jpg - Bitmap [3550x4734, 24 bits, JPG]",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\images\\airport-background.jpg",
+              "RelativeDocumentMoniker": "wwwroot\\images\\airport-background.jpg",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\images\\airport-background.jpg - Bitmap [3550x4734, 24 bits, JPG]",
+              "RelativeToolTip": "wwwroot\\images\\airport-background.jpg - Bitmap [3550x4734, 24 bits, JPG]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
+              "WhenOpened": "2025-05-20T14:07:59.802Z",
+              "EditorCaption": " - Bitmap [3550x4734, 24 bits, JPG]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "site.css",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\css\\site.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\wwwroot\\css\\site.css",
+              "RelativeToolTip": "wwwroot\\css\\site.css",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAowCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-05-20T14:03:15.708Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:51:58.704Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:51:55.221Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:47:24.005Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:47:15.225Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAswDwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:46:58.463Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "Views\\_ViewImports.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:46:07.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "Views\\_ViewStart.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-20T13:46:04.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "TicketsController.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TicketsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TicketsController.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TicketsController.cs",
+              "RelativeToolTip": "Controllers\\TicketsController.cs",
+              "ViewState": "AgIAAN8BAAAAAAAAAAAAAN8BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T13:41:06.564Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "StaffsController.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\StaffsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StaffsController.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\StaffsController.cs",
+              "RelativeToolTip": "Controllers\\StaffsController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T13:40:21.17Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "TravellersController.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TravellersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TravellersController.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\TravellersController.cs",
+              "RelativeToolTip": "Controllers\\TravellersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T13:39:30.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "GestionAirPort.csproj",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\GestionAirPort.csproj",
+              "RelativeDocumentMoniker": "GestionAirPort.csproj",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\GestionAirPort.csproj",
+              "RelativeToolTip": "GestionAirPort.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-05-20T13:37:20.512Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlanesController.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PlanesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\PlanesController.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\PlanesController.cs",
+              "RelativeToolTip": "Controllers\\PlanesController.cs",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T13:20:52.527Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "FlightsController.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\FlightsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FlightsController.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Controllers\\FlightsController.cs",
+              "RelativeToolTip": "Controllers\\FlightsController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAAAFsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-20T13:19:46.289Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-19T17:40:53.153Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "about_EntityFrameworkCore.help.txt",
+              "DocumentMoniker": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt",
+              "ToolTip": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt [Lecture seule]",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\tools\\about_EntityFrameworkCore.help.txt [Lecture seule]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-05-19T17:30:57.038Z",
+              "EditorCaption": " [Lecture seule]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "PACKAGE.md",
+              "DocumentMoniker": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md",
+              "RelativeDocumentMoniker": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md",
+              "ToolTip": "C:\\Users\\bessa\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md [Lecture seule]",
+              "RelativeToolTip": "..\\..\\..\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\8.0.11\\docs\\PACKAGE.md [Lecture seule]",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-05-19T17:30:55.788Z",
+              "EditorCaption": " [Lecture seule]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Plane.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Plane.cs",
+              "RelativeDocumentMoniker": "Models\\Plane.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Plane.cs",
+              "RelativeToolTip": "Models\\Plane.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:12:20.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "AirportContext.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\data\\AirportContext.cs",
+              "RelativeDocumentMoniker": "data\\AirportContext.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\data\\AirportContext.cs",
+              "RelativeToolTip": "data\\AirportContext.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAIwBkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:11:43.286Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Traveller.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Traveller.cs",
+              "RelativeDocumentMoniker": "Models\\Traveller.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Traveller.cs",
+              "RelativeToolTip": "Models\\Traveller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:01:10.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "Ticket.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Ticket.cs",
+              "RelativeDocumentMoniker": "Models\\Ticket.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Ticket.cs",
+              "RelativeToolTip": "Models\\Ticket.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAuwEUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:01:10.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Staff.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Staff.cs",
+              "RelativeDocumentMoniker": "Models\\Staff.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Staff.cs",
+              "RelativeToolTip": "Models\\Staff.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:01:08.822Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Passenger.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Passenger.cs",
+              "RelativeDocumentMoniker": "Models\\Passenger.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Passenger.cs",
+              "RelativeToolTip": "Models\\Passenger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:01:07.918Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FullName.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\FullName.cs",
+              "RelativeDocumentMoniker": "Models\\FullName.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\FullName.cs",
+              "RelativeToolTip": "Models\\FullName.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:01:05.165Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "Flight.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Flight.cs",
+              "RelativeDocumentMoniker": "Models\\Flight.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Models\\Flight.cs",
+              "RelativeToolTip": "Models\\Flight.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAwAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:00:59.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAAwNUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-19T17:00:19.279Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\bessa\\source\\repos\\GestionAirPort\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAoAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-05-19T16:59:52.17Z"
             }
           ]
         }
